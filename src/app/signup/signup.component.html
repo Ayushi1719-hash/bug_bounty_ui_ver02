@@ -1,0 +1,271 @@
+<p>signup works!</p>
+<div class="auth-container">
+    <div class="auth-card">
+      <div class="auth-header">
+        <a routerLink="/" class="logo">BugBounty</a>
+        <h1>Create Your Account</h1>
+        <!-- <p>Join TechBoost and start your personalized learning journey</p> -->
+      </div>
+  
+      <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="auth-form">
+        <!-- Full Name Field -->
+        <div class="form-group">
+          <label for="fullName">Full Name</label>
+          <div class="input-container">
+            <input
+              type="text"
+              id="fullName"
+              formControlName="fullName"
+              placeholder="John Doe"
+              [class.is-invalid]="
+                signupForm.get('fullName')?.invalid &&
+                signupForm.get('fullName')?.touched
+              "
+            />
+            <div class="input-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                <circle cx="12" cy="7" r="4"></circle>
+              </svg>
+            </div>
+          </div>
+          <div
+            class="error-message"
+            *ngIf="
+              signupForm.get('fullName')?.invalid &&
+              signupForm.get('fullName')?.touched
+            "
+          >
+            <span *ngIf="signupForm.get('fullName')?.errors?.['required']"
+              >Full name is required</span
+            >
+            <span *ngIf="signupForm.get('fullName')?.errors?.['minlength']"
+              >Full name must be at least 3 characters</span
+            >
+          </div>
+        </div>
+  
+        <!-- Email Field -->
+        <div class="form-group">
+          <label for="email">Email</label>
+          <div class="input-container">
+            <input
+              type="email"
+              id="email"
+              formControlName="email"
+              placeholder="your.email@example.com"
+              [class.is-invalid]="
+                signupForm.get('email')?.invalid &&
+                signupForm.get('email')?.touched
+              "
+            />
+            <div class="input-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
+                ></path>
+                <polyline points="22,6 12,13 2,6"></polyline>
+              </svg>
+            </div>
+          </div>
+          <div
+            class="error-message"
+            *ngIf="
+              signupForm.get('email')?.invalid && signupForm.get('email')?.touched
+            "
+          >
+            <span *ngIf="signupForm.get('email')?.errors?.['required']"
+              >Email is required</span
+            >
+            <span *ngIf="signupForm.get('email')?.errors?.['email']"
+              >Please enter a valid email address</span
+            >
+          </div>
+        </div>
+  
+        <!-- Password Field -->
+        <div class="form-group">
+          <label for="password">Password</label>
+          <div class="input-container">
+            <input
+              [type]="showPassword ? 'text' : 'password'"
+              id="password"
+              formControlName="password"
+              placeholder="••••••••"
+              [class.is-invalid]="
+                signupForm.get('password')?.invalid &&
+                signupForm.get('password')?.touched
+              "
+            />
+            <div
+              class="input-icon clickable"
+              (click)="togglePasswordVisibility()"
+            >
+              <svg
+                *ngIf="!showPassword"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <svg
+                *ngIf="showPassword"
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <path
+                  d="M17.94 17.94A10.07 10.07 0 0 1 12 20c-7 0-11-8-11-8a18.45 18.45 0 0 1 5.06-5.94M9.9 4.24A9.12 9.12 0 0 1 12 4c7 0 11 8 11 8a18.5 18.5 0 0 1-2.16 3.19m-6.72-1.07a3 3 0 1 1-4.24-4.24"
+                ></path>
+                <line x1="1" y1="1" x2="23" y2="23"></line>
+              </svg>
+            </div>
+          </div>
+          <div
+            class="error-message"
+            *ngIf="
+              signupForm.get('password')?.invalid &&
+              signupForm.get('password')?.touched
+            "
+          >
+            <span *ngIf="signupForm.get('password')?.errors?.['required']"
+              >Password is required</span
+            >
+            <span *ngIf="signupForm.get('password')?.errors?.['minlength']"
+              >Password must be at least 8 characters</span
+            >
+            <span *ngIf="signupForm.get('password')?.errors?.['pattern']"
+              >Password must include uppercase, lowercase, number and special
+              character</span
+            >
+          </div>
+          <div class="password-hint">
+            Password must be at least 8 characters and include uppercase,
+            lowercase, number and special character.
+          </div>
+        </div>
+  
+        <!-- Terms Checkbox -->
+        <div class="form-options">
+          <div class="terms-checkbox">
+            <input type="checkbox" id="terms" formControlName="terms" />
+            <label for="terms"
+              >I agree to the <a routerLink="/terms">Terms of Service</a> and
+              <a routerLink="/privacy">Privacy Policy</a></label
+            >
+          </div>
+          <div
+            class="error-message"
+            *ngIf="
+              signupForm.get('terms')?.invalid && signupForm.get('terms')?.touched
+            "
+          >
+            <span>You must agree to the terms and conditions</span>
+          </div>
+        </div>
+  
+        <!-- OTP Input Section -->
+        <div class="form-group" *ngIf="otpVisible" [formGroup]="otpForm">
+          <label for="otp">Enter OTP</label>
+          <div class="input-container">
+            <input
+              type="text"
+              id="otp"
+              formControlName="otp"
+              placeholder="123456"
+              [class.is-invalid]="
+                otpForm.get('otp')?.invalid && otpForm.get('otp')?.touched
+              "
+            />
+            <div class="input-icon">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                width="20"
+                height="20"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 6v6l4 2"></path>
+              </svg>
+            </div>
+          </div>
+          <div
+            class="error-message"
+            *ngIf="otpForm.get('otp')?.invalid && otpForm.get('otp')?.touched"
+          >
+            <span *ngIf="otpForm.get('otp')?.errors?.['required']"
+              >OTP is required</span
+            >
+            <span *ngIf="otpForm.get('otp')?.errors?.['pattern']"
+              >OTP must be 6 digits</span
+            >
+          </div>
+        </div>
+  
+        <div *ngIf="errorMessage" class="error-alert">
+          {{ errorMessage }}
+        </div>
+  
+        <div *ngIf="successMessage" class="success-alert">
+          {{ successMessage }}
+        </div>
+  
+        <button
+          type="submit"
+          class="btn-submit"
+          [disabled]="
+            isSubmitting ||
+            (otpVisible && otpForm.invalid) ||
+            (!otpVisible && signupForm.invalid)
+          "
+        >
+          <span *ngIf="!isSubmitting">Create Account</span>
+          <span *ngIf="isSubmitting" class="spinner"></span>
+        </button>
+      </form>
+  
+      <div class="auth-footer">
+        <p>Already have an account? <a routerLink="/login">Log in</a></p>
+      </div>
+    </div>
+  </div>
+   
