@@ -1,0 +1,12 @@
+<div class="filter-container">
+    <input type="text" placeholder="Search Bugs" [(ngModel)]="searchTerm" (input)="applyFilters()" />
+    <select [(ngModel)]="selectedCategory" (change)="applyFilters()">
+      <option value="">All Categories</option>
+      <option *ngFor="let category of categories" [value]="category">{{ category }}</option>
+    </select>
+    <select [(ngModel)]="selectedTechStack" (change)="applyFilters()">
+      <option value="">All Tech Stacks</option>
+      <option *ngFor="let tech of techStacks" [value]="tech">{{ tech }}</option>
+    </select>
+  </div>
+  
