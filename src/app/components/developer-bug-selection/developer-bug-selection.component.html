@@ -1,0 +1,26 @@
+<div class="bug-selection-container">
+    <h2>Select a Bug to Work On</h2>
+ 
+    <div class="filters">
+      <label for="difficulty">Difficulty:</label>
+      <select id="difficulty" [(ngModel)]="selectedDifficulty" (change)="applyFilters()">
+        <option value="">All</option>
+        <option *ngFor="let level of difficulties" [value]="level">{{ level }}</option>
+      </select>
+ 
+      <label for="techStack">Tech Stack:</label>
+      <select id="techStack" [(ngModel)]="selectedTechStack" (change)="applyFilters()">
+        <option value="">All</option>
+        <option *ngFor="let stack of techStacks" [value]="stack">{{ stack }}</option>
+      </select>
+    </div>
+ 
+    <div class="bug-list">
+      <div *ngFor="let bug of filteredBugs" class="bug-card">
+        <h3>{{ bug.title }}</h3>
+        <p>{{ bug.description }}</p>
+        <span class="difficulty">{{ bug.difficulty }}</span>
+        <span class="tech">{{ bug.techStack }}</span>
+      </div>
+    </div>
+  </div>

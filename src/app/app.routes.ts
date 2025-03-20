@@ -4,6 +4,8 @@ import { ContactPageComponent } from './components/contact-page/contact-page.com
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { RoleSelectionComponent } from './components/role-selection/role-selection.component';
+import { DeveloperBugSelectionComponent } from './components/developer-bug-selection/developer-bug-selection.component';
 
 export const routes: Routes = [
     {
@@ -20,6 +22,12 @@ export const routes: Routes = [
     },{
         path: 'about-us', component: AboutUsComponent, pathMatch: 'full'
     },
+    {
+         path: 'select-role', component: RoleSelectionComponent, pathMatch: 'full'
+    },
+    {
+        path: 'developer-bugs', component: DeveloperBugSelectionComponent, pathMatch: 'full'
+   },
 
     {
         path: '', redirectTo: 'home', pathMatch: 'full'

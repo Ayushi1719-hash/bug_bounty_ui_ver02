@@ -44,7 +44,7 @@ export class LoginComponent {
         .login(this.loginForm.value.email, this.loginForm.value.password)
         .subscribe({
           next: () => {
-            this.router.navigate(['/']);
+            this.router.navigate(['/select-role']);
           },
           error: (err) => {
             this.isSubmitting = false;

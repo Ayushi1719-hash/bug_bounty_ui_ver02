@@ -1,0 +1,20 @@
+<div class="role-selection-container">
+    <h1>Select Your Role</h1>
+    <p class="role-description">Choose whether you are a Developer or a Company</p>
+ 
+    <div class="role-cards">
+      <!-- Developer Role Card -->
+      <div class="role-card developer-card" (click)="selectRole('developer')">
+        <img src="https://cdn-icons-png.flaticon.com/512/1995/1995574.png" alt="Developer Icon">
+        <h2>Developer</h2>
+        <p>Find and fix real-world bugs to improve your skills and earn rewards.</p>
+      </div>
+ 
+      <!-- Company Role Card -->
+      <div class="role-card company-card" (click)="selectRole('company')">
+        <img src="https://cdn-icons-png.flaticon.com/512/2103/2103625.png" alt="Company Icon">
+        <h2>Company</h2>
+        <p>Submit bugs and let skilled developers help fix issues in your software.</p>
+      </div>
+    </div>
+  </div>
