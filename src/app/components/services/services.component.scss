@@ -1,0 +1,191 @@
+// Color Variables
+$primary-color: #007bff; // BugBounty Primary Blue
+$secondary-color: #f4b400; // Gold Accent
+$accent-color: #ff4081; // Bright Pink
+$dark-color: #1e293b; // Deep Navy Blue
+$light-color: #f8f9fa; // Light Background
+$text-color: #343a40; // Dark Text Color
+$text-light: #6c757d; // Light Text Color
+$border-radius: 10px;
+$box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
+$transition: all 0.3s ease;
+$error-color: #dc3545; // Error color
+$success-color: #28a745; // Success color
+
+// Global Body Background Color
+body {
+  background-color: $dark-color; // Apply a light background color for the whole website
+  color: $text-color; // Ensure text is legible on light backgrounds
+  font-family: 'Arial', sans-serif; // Set a default font for better readability
+  margin: 0;
+  padding: 0;
+}
+
+// General Page Styling
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+}
+
+header {
+  background: linear-gradient(135deg, $primary-color 0%, $dark-color 100%);
+  color: white;
+  padding: 2rem 0;
+  text-align: center;
+
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .tagline {
+    font-size: 1.2rem;
+    font-weight: 300;
+  }
+}
+
+// Introduction Section
+.intro {
+  background-color: $light-color;
+  color: $text-color;
+  padding: 2rem;
+  font-size: 1.2rem;
+  border-radius: $border-radius;
+  margin-bottom: 2rem;
+}
+
+h2 {
+  font-size: 2.5rem; // Larger font size for heading
+  font-weight: 600; // Bold weight for better emphasis
+  color: $primary-color; // Use primary color for the heading
+  margin-bottom: 1.5rem; // Space below the heading
+  text-align: center;
+}
+
+// Services Section
+.services {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+}
+
+.service {
+  background: white;
+  padding: 2rem;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  transition: $transition;
+  color: $text-color;
+
+  &:hover {
+    background: linear-gradient(135deg, $primary-color 0%, $dark-color 1000%);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  }
+
+  i {
+    font-size: 2.5rem;
+    color: $dark-color;
+    margin-bottom: 1rem;
+  }
+
+  h3 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: $dark-color;
+  }
+
+  p {
+    font-size: 1rem;
+    color: $text-light;
+  }
+}
+
+// Footer
+footer {
+  text-align: center;
+  background: $dark-color;
+  color: white;
+  padding: 1rem;
+  margin-top: 2rem;
+}
+
+// Call to Action Section
+.cta {
+  background: linear-gradient(90deg, #14142B, #14142B);
+  padding: 3rem;
+  border-radius: $border-radius;
+  color: white;
+  text-align: center;
+  margin-top: 2rem;
+
+  h2 {
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .cta-button {
+    background: white;
+    color: black;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    border-radius: $border-radius;
+    text-decoration: none;
+    transition: $transition;
+
+    &:hover {
+      background: $secondary-color;
+      color: white;
+    }
+  }
+}
+// Error and Success Messages
+.error-message {
+  background-color: $error-color;
+  color: white;
+  padding: 1rem;
+  border-radius: $border-radius;
+  margin-top: 1rem;
+}
+
+.success-message {
+  background-color: $success-color;
+  color: white;
+  padding: 1rem;
+  border-radius: $border-radius;
+  margin-top: 1rem;
+}
+
+// Links Styling
+a {
+  color: $primary-color;
+  text-decoration: none;
+  transition: $transition;
+
+  &:hover {
+    color: $accent-color;
+  }
+}
+
+// Buttons and Links
+button,
+a.button {
+  background: $primary-color;
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: $border-radius;
+  font-size: 1.2rem;
+  font-weight: bold;
+  border: none;
+  transition: $transition;
+  text-decoration: none;
+
+  &:hover {
+    background: $accent-color;
+    transform: translateY(-2px);
+  }
+}

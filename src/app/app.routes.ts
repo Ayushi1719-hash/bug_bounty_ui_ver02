@@ -4,6 +4,7 @@ import { ContactPageComponent } from './components/contact-page/contact-page.com
 import { AboutUsComponent } from './components/about-us/about-us.component';
 import { LoginComponent } from './login/login.component';
 import { SignupComponent } from './signup/signup.component';
+import { ServicesComponent } from './components/services/services.component';
 
 export const routes: Routes = [
     {
@@ -15,6 +16,7 @@ export const routes: Routes = [
     {
         path: 'home', component: HomeComponent, pathMatch: 'full'
     }, 
+    { path: 'services', component: ServicesComponent,pathMatch:'full' },
     {
         path: 'contact', component: ContactPageComponent, pathMatch: 'full'
     },{
