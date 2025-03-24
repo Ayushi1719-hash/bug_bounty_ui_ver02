@@ -1,0 +1,51 @@
+<div class="bug-selection-container">
+    <h2>Select a Bug to Work On</h2>
+     
+      <div class="filters">
+    <label for="difficulty">Difficulty:</label>
+    <select id="difficulty" [(ngModel)]="selectedDifficulty" (change)="applyFilters()">
+    <option value="">All</option>
+    <option *ngFor="let level of difficulties" [value]="level">{{ level }}</option>
+    </select>
+     
+        <label for="techStack">Tech Stack:</label>
+    <select id="techStack" [(ngModel)]="selectedTechStack" (change)="applyFilters()">
+    <option value="">All</option>
+    <option *ngFor="let stack of techStacks" [value]="stack">{{ stack }}</option>
+    </select>
+     
+    
+        <button (click)="applyFilters()">Search</button>
+    </div>
+     
+      <div class="bug-list">
+    <div *ngFor="let bug of filteredBugs" class="bug-card">
+    <div class="bug-header">
+    <h3>{{ bug.title }}</h3>
+    <span class="favorite">&#9733;</span> <!-- Star Icon -->
+    </div>
+    <p>{{ bug.description }}</p>
+     
+          <div class="bug-details">
+    <span class="difficulty">{{ bug.difficulty }}</span>
+    <span class="tech">{{ bug.techStack }}</span>
+    </div>
+     
+          <!-- Icons Section -->
+    <div class="bug-icons">
+    <span><img src="https://cdn-icons-png.flaticon.com/512/482/482138.png" alt="views"> 69</span>
+    <span><img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="people"> 52</span>
+    <span><img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="success"> 99%</span>
+    </div>
+     
+          <button class="see-details">See details</button>
+    </div>
+    </div>
+     
+      <div *ngIf="filteredBugs.length === 0" class="no-bugs">
+    
+        No bugs found. Try different filters.
+    </div>
+    </div>
+    
+     

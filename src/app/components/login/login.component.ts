@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../../app/services.service';
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -44,7 +45,7 @@ export class LoginComponent {
         .login(this.loginForm.value.email, this.loginForm.value.password)
         .subscribe({
           next: () => {
-            this.router.navigate(['/']);
+            this.router.navigate(['/select-role']);
           },
           error: (err) => {
             this.isSubmitting = false;
@@ -65,5 +66,6 @@ export class LoginComponent {
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
+
 }
  
