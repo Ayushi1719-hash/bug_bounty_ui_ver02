@@ -3,8 +3,8 @@ import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from "./components/home/home.component";
 import { TopBannerComponent } from "./components/top-banner/top-banner.component";
 import { NavbarComponent } from "./components/navbar/navbar.component";
-import { LoginComponent } from './login/login.component';
-import { SignupComponent } from './signup/signup.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignupComponent } from './components/signup/signup.component';
 
 @Component({
   selector: 'app-root',
