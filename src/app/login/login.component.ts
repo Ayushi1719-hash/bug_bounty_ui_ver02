@@ -9,6 +9,7 @@ import {
 } from '@angular/forms';
 import { AuthService } from '../app/services.service';
 
+
 @Component({
   selector: 'app-login',
   standalone: true,
@@ -65,5 +66,6 @@ export class LoginComponent {
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
+
 }
  
