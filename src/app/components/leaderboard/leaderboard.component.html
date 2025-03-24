@@ -1,0 +1,76 @@
+<!-- leaderboard.component.html -->
+<div class="leaderboard-container">
+    <div class="header">
+      <h1>HackerOne Leaderboard</h1>
+      <p class="subtitle">All leaderboards are based on the selected time period.</p>
+    </div>
+  
+    <div class="divider"></div>
+  
+    <div class="section">
+      <p class="subtitle">Ranking is calculated based on ratings and number of bugs solved.</p>
+    </div>
+  
+    <div *ngIf="loading" class="loading">
+      Loading leaderboard data...
+    </div>
+  
+    <div *ngIf="error" class="error">
+      Error loading leaderboard. Please try again later.
+    </div>
+  
+    <div *ngIf="!loading && !error" class="table-container">
+      <div class="table-header">
+        <div class="col rank-col"></div>
+        <div class="col hacker-col">Hacker</div>
+        <div class="col rating-col">Rating</div>
+        <div class="col bugs-col">
+          Number of Bugs
+          <span class="info-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+          </span>
+        </div>
+        <div class="col score-col">
+          Score
+          <span class="info-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="16" x2="12" y2="12"></line>
+              <line x1="12" y1="8" x2="12.01" y2="8"></line>
+            </svg>
+          </span>
+        </div>
+      </div>
+  
+      <div class="hacker-row" *ngFor="let hacker of hackers; let i = index">
+        <div class="col rank-col">
+          <div class="rank-change">
+            <svg *ngIf="hacker.change === 'up'" class="change-icon up" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="18 15 12 9 6 15"></polyline>
+            </svg>
+            <svg *ngIf="hacker.change === 'down'" class="change-icon down" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="6 9 12 15 18 9"></polyline>
+            </svg>
+          </div>
+          <div class="rank">{{ i + 1 }}.</div>
+        </div>
+        
+        <div class="col hacker-col">
+          <div class="hacker-info">
+            <div class="avatar">
+              <img [src]="hacker.avatar" alt="{{ hacker.name }}'s avatar" onerror="this.src='assets/default-avatar.png'">
+            </div>
+            <span class="username">{{ hacker.name }}</span>
+          </div>
+        </div>
+        
+        <div class="col rating-col">{{ hacker.rating }}</div>
+        <div class="col bugs-col">{{ hacker.numberOfBugs }}</div>
+        <div class="col score-col">{{ hacker.score | number:'1.1-1' }}</div>
+      </div>
+    </div>
+  </div>

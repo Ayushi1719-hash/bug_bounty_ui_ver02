@@ -1,226 +1,224 @@
 .bug-selection-container {
+ 
+  text-align: center;
+
+  color: white;
+
+  padding: 20px;
+
+}
+ 
+.filters {
+
+  display: flex;
+
+  justify-content: center;
+
+  gap: 15px;
+
+  margin-bottom: 20px;
+ 
+  select, button {
+
+    padding: 8px;
+
+    font-size: 16px;
+
+    border-radius: 5px;
+
+  }
+ 
+  button {
+
+    background: #007bff;
+
+    color: white;
+
+    border: none;
+
+    cursor: pointer;
+
+    transition: 0.3s;
+ 
+    &:hover {
+
+      background: #0056b3;
+
+    }
+
+  }
+
+}
+ 
+.bug-list {
+
+  display: grid;
+
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+
+  gap: 20px;
+
+  justify-content: center;
+
+  padding: 20px;
+
+}
+ 
+.bug-card {
+
+  background: #f4f2f2;
+
+  color: rgb(19, 18, 18);
+
+  border-radius: 10px;
+
+  padding: 15px;
+
+  text-align: left;
+
+  display: flex;
+
+  flex-direction: column;
+
+  justify-content: space-between;
+
+  min-height: 220px;
+
+  width: 280px;
+
+  transition: 0.3s ease-in-out;
+
+  position: relative;
+ 
+  &:hover {
+
+    transform: scale(1.05);
+
+    box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+
+  }
+ 
+  .bug-header {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+ 
+    .favorite {
+
+      font-size: 20px;
+
+      color: gold;
+
+      cursor: pointer;
+
+    }
+
+  }
+ 
+  .bug-details {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 10px;
+ 
+    .difficulty {
+
+      background: rgb(2, 81, 21);
+
+      padding: 5px;
+
+      border-radius: 5px;
+
+      font-weight: bold;
+     
+
+    }
+ 
+    .tech {
+
+      color: rgb(2, 16, 20);
+
+      font-weight: bold;
+
+    }
+
+  }
+ 
+  .bug-icons {
+
+    display: flex;
+
+    justify-content: space-between;
+
+    margin-top: 10px;
+ 
+    span {
+
+      display: flex;
+
+      align-items: center;
+
+      gap: 5px;
+
+      font-size: 14px;
+
+    }
+ 
+    img {
+
+      width: 18px;
+
+      height: 18px;
+
+    }
+
+  }
+ 
+  .see-details {
+
+    background: #007bff;
+
+    color: white;
+
+    border: none;
+
+    padding: 8px;
+
+    margin-top: 10px;
+
+    cursor: pointer;
 
     text-align: center;
-  
-    color: white;
-  
-    padding: 20px;
-  
-  }
-   
-  .filters {
-  
-    display: flex;
-  
-    justify-content: center;
-  
-    gap: 15px;
-  
-    margin-bottom: 20px;
-   
-    select, button {
-  
-      padding: 8px;
-  
-      font-size: 16px;
-  
-      border-radius: 5px;
-  
-    }
-   
-    button {
-  
-      background: #007bff;
-  
-      color: white;
-  
-      border: none;
-  
-      cursor: pointer;
-  
-      transition: 0.3s;
-   
-      &:hover {
-  
-        background: #0056b3;
-  
-      }
-  
-    }
-  
-  }
-   
-  .bug-list {
-  
-    display: grid;
-  
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  
-    gap: 20px;
-  
-    justify-content: center;
-  
-    padding: 20px;
-  
-  }
-   
-  .bug-card {
-  
-    background: #f4f2f2;
-  
-    color: rgb(19, 18, 18);
-  
-    border-radius: 10px;
-  
-    padding: 15px;
-  
-    text-align: left;
-  
-    display: flex;
-  
-    flex-direction: column;
-  
-    justify-content: space-between;
-  
-    min-height: 220px;
-  
-    width: 280px;
-  
-    transition: 0.3s ease-in-out;
-  
-    position: relative;
-   
+
+    border-radius: 5px;
+
+    transition: 0.3s;
+ 
     &:hover {
-  
-      transform: scale(1.05);
-  
-      box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
-  
+
+      background: #0056b3;
+
     }
-   
-    .bug-header {
-  
-      display: flex;
-  
-      justify-content: space-between;
-  
-      align-items: center;
-   
-      .favorite {
-  
-        font-size: 20px;
-  
-        color: gold;
-  
-        cursor: pointer;
-  
-      }
-  
-    }
-   
-    .bug-details {
-  
-      display: flex;
-  
-      justify-content: space-between;
-  
-      margin-top: 10px;
-   
-      .difficulty {
-  
-        background: rgb(2, 81, 21);
-  
-        padding: 5px;
-  
-        border-radius: 5px;
-  
-        font-weight: bold;
-        
-  
-      }
-   
-      .tech {
-  
-        color: rgb(2, 16, 20);
-  
-        font-weight: bold;
-  
-      }
-  
-    }
-   
-    .bug-icons {
-  
-      display: flex;
-  
-      justify-content: space-between;
-  
-      margin-top: 10px;
-   
-      span {
-  
-        display: flex;
-  
-        align-items: center;
-  
-        gap: 5px;
-  
-        font-size: 14px;
-  
-      }
-   
-      img {
-  
-        width: 18px;
-  
-        height: 18px;
-  
-      }
-  
-    }
-   
-    .see-details {
-  
-      background: #007bff;
-  
-      color: white;
-  
-      border: none;
-  
-      padding: 8px;
-  
-      margin-top: 10px;
-  
-      cursor: pointer;
-  
-      text-align: center;
-  
-      border-radius: 5px;
-  
-      transition: 0.3s;
-   
-      &:hover {
-  
-        background: #0056b3;
-  
-      }
-  
-    }
-  
+
   }
-   
-  .no-bugs {
-  
-    text-align: center;
-  
-    font-size: 18px;
-  
-    font-weight: bold;
-  
-    color: #ff4c4c;
-  
-    margin-top: 20px;
-  
-  }
-  
-   
+
+}
+ 
+.no-bugs {
+
+  text-align: center;
+
+  font-size: 18px;
+
+  font-weight: bold;
+
+  color: #ff4c4c;
+
+  margin-top: 20px;
+
+}

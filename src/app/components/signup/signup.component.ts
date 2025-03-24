@@ -26,6 +26,8 @@ export class SignupComponent {
   errorMessage = '';
   successMessage = '';
 
+  roles = ['developer', 'company']; // Added roles for dropdown
+
   constructor(
     private fb: FormBuilder,
     private authService: AuthService,
@@ -34,6 +36,7 @@ export class SignupComponent {
     this.signupForm = this.fb.group({
       fullName: ['', [Validators.required, Validators.minLength(3)]],
       email: ['', [Validators.required, Validators.email]],
+      userRole: ['', [Validators.required]], // Role field updated
       password: [
         '',
         [
@@ -63,7 +66,8 @@ export class SignupComponent {
         .sendOtp(
           this.signupForm.value.fullName,
           this.signupForm.value.email,
-          this.signupForm.value.password
+          this.signupForm.value.password,
+          this.signupForm.value.userRole // Role added
         )
         .subscribe({
           next: (response) => {
@@ -102,61 +106,23 @@ export class SignupComponent {
           error: (err) => {
             this.isSubmitting = false;
             this.errorMessage =
-              err.error?.message ||
-              'OTP verification failed. Please try again.';
+              err.error?.message || 'OTP verification failed. Please try again.';
           },
         });
     } else {
-      // Mark all fields as touched to trigger validation messages
       Object.keys(this.signupForm.controls).forEach((key) => {
-        const control = this.signupForm.get(key);
-        control?.markAsTouched();
+        this.signupForm.get(key)?.markAsTouched();
       });
 
       if (this.otpVisible) {
         Object.keys(this.otpForm.controls).forEach((key) => {
-          const control = this.otpForm.get(key);
-          control?.markAsTouched();
+          this.otpForm.get(key)?.markAsTouched();
         });
       }
     }
-
-    // if (this.signupForm.valid) {
-    //   this.isSubmitting = true;
-
-    //   this.authService
-    //     .register(
-    //       this.signupForm.value.fullName,
-    //       this.signupForm.value.email,
-    //       this.signupForm.value.password
-    //     )
-    //     .subscribe({
-    //       next: (response) => {
-    //         this.isSubmitting = false;
-    //         this.successMessage =
-    //           response.message || 'Registration successful! You can now login.';
-    //         this.signupForm.reset();
-    //         setTimeout(() => {
-    //           this.router.navigate(['/login']);
-    //         }, 2000);
-    //       },
-    //       error: (err) => {
-    //         this.isSubmitting = false;
-    //         this.errorMessage =
-    //           err.error?.message || 'Registration failed. Please try again.';
-    //       },
-    //     });
-    // } else {
-    //   // Mark all fields as touched to trigger validation messages
-    //   Object.keys(this.signupForm.controls).forEach((key) => {
-    //     const control = this.signupForm.get(key);
-    //     control?.markAsTouched();
-    //   });
-    // }
   }
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
 }
- 

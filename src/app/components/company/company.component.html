@@ -1,0 +1,55 @@
+<div class="header">
+    <h1>Bug Bounty Dashboard</h1>
+  </div>
+   
+  <div class="navbar-container">
+    <div class="navbar">
+      <div class="navbar-left">
+        <button class="navbar-item" (click)="filterBugs('all')">All Bugs</button>
+        <button class="navbar-item" (click)="filterBugs('reviewed')">Reviewed Bugs</button>
+        <button class="navbar-item" (click)="filterBugs('to be assigned')">Bugs to be Assigned</button>
+        <button class="navbar-item" (click)="filterBugs('resolved')">Resolved Bugs</button>
+        <button class="navbar-item" (click)="filterBugs('dev count')">Number of Developers Working</button>
+        <button class="navbar-item" (click)="filterBugs('rating')">Rating & Feedback</button>
+      </div>
+    </div>
+   
+    <!-- Post New Bugs Button (Static at the Bottom) -->
+    <div class="post-bugs-container">
+      <button (click)="navigateToPostBugs()" class="post-bugs-btn">Post New Bugs</button>
+    </div>
+  </div>
+   
+  <div class="bug-cards-container">
+    <div class="bug-card" *ngFor="let bug of filteredBugs">
+      <div class="bug-status" [ngClass]="getStatusClass(bug.status)">
+        {{ bug.status }}
+      </div>
+   
+      <h3 class="bug-title">{{ bug.title }}</h3>
+      <p class="bug-description">{{ bug.description }}</p>
+   
+      <!-- Tags (Similar to HackerOne Style) -->
+      <div class="bug-tags">
+        <span *ngFor="let tag of bug.tags" class="bug-tag">{{ tag }}</span>
+      </div>
+   
+      <div class="bug-info">
+        <!-- Tech Stack Icons -->
+        <div class="tech-stack">
+          <img [src]="getTechStackIcon(bug.techStack)" alt="{{ bug.techStack }} icon" class="tech-icon" />
+          <span>{{ bug.techStack }}</span>
+        </div>
+   
+        <!-- Bounty & Image -->
+        <div class="bounty">
+          <img [src]="bug.image" alt="Bug Image" class="bounty-icon" />
+          <span class="bounty-value">{{ bug.reward }} points</span>
+        </div>
+        <div class="developer-count">
+          <strong>Total Developers Working:</strong> <span>{{ bug.developerCount || 0 }}</span>
+        </div>
+        <p class="timestamp">Posted: {{ getRelativeTime(bug.createdAt) }}</p>
+      </div>
+    </div>
+  </div>

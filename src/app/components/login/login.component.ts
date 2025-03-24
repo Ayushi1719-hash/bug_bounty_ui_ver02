@@ -37,21 +37,31 @@ export class LoginComponent {
 
   onSubmit() {
     this.errorMessage = '';
-
+  
     if (this.loginForm.valid) {
       this.isSubmitting = true;
-
+  
       this.AuthService
         .login(this.loginForm.value.email, this.loginForm.value.password)
         .subscribe({
-          next: () => {
-            this.router.navigate(['/select-role']);
+          next: (response) => {
+            // Store token & role in localStorage or a service
+            localStorage.setItem('token', response.token);
+            localStorage.setItem('userRole', response.role);
+  
+            // Redirect based on role
+            if (response.roles[0]==='company') {
+              this.router.navigate(['/company']);
+            } else if (response.roles[0]==='developer') {
+              this.router.navigate(['/developer']);
+            } else {
+              this.router.navigate(['/select-role']);  // Default fallback
+            }
           },
           error: (err) => {
             this.isSubmitting = false;
             this.errorMessage =
-              err.error?.message ||
-              'Failed to login. Please check your credentials.';
+              err.error?.message || 'Failed to login. Please check your credentials.';
           },
         });
     } else {
@@ -62,6 +72,7 @@ export class LoginComponent {
       });
     }
   }
+  
 
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;

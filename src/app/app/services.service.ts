@@ -59,13 +59,14 @@ export class AuthService {
     );
   }
 
-  sendOtp(fullName: string, email: string, password: string): Observable<any> {
+  sendOtp(fullName: string, email: string, password: string, userRole: any): Observable<any> {
     return this.http.post(
       AUTH_API + 'signup',
       {
         fullName,
         email,
         password,
+        userRole,
       },
       httpOptions
     );
