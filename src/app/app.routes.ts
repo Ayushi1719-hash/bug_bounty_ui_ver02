@@ -2,8 +2,12 @@ import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { ContactPageComponent } from './components/contact-page/contact-page.component';
 import { AboutUsComponent } from './components/about-us/about-us.component';
+
 import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
+
+import { ServicesComponent } from './components/services/services.component';
+
 
 export const routes: Routes = [
     {
@@ -15,6 +19,7 @@ export const routes: Routes = [
     {
         path: 'home', component: HomeComponent, pathMatch: 'full'
     }, 
+    { path: 'services', component: ServicesComponent,pathMatch:'full' },
     {
         path: 'contact', component: ContactPageComponent, pathMatch: 'full'
     },{
