@@ -1,3 +1,4 @@
+<!--
 <div class="bug-selection-container">
   <h2>Select a Bug to Work On</h2>
    
@@ -22,23 +23,21 @@
   <div *ngFor="let bug of filteredBugs" class="bug-card">
   <div class="bug-header">
   <h3>{{ bug.title }}</h3>
-  <span class="favorite">&#9733;</span> <!-- Star Icon -->
   </div>
   <p>{{ bug.description }}</p>
    
-        <div class="bug-details">
+  <div class="bug-details">
   <span class="difficulty">{{ bug.difficulty }}</span>
   <span class="tech">{{ bug.techStack }}</span>
   </div>
    
-        <!-- Icons Section -->
+      
   <div class="bug-icons">
-  <span><img src="https://cdn-icons-png.flaticon.com/512/482/482138.png" alt="views"> 69</span>
-  <span><img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="people"> 52</span>
-  <span><img src="https://cdn-icons-png.flaticon.com/512/190/190411.png" alt="success"> 99%</span>
+  <a href=''><span><img src="https://cdn-icons-png.flaticon.com/512/482/482138.png" alt="views"></span></a>
+  <a href=''><span><img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="people"></span></a>
   </div>
    
-        <button class="see-details">See details</button>
+        <a href="/bug-details"><button class="see-details">See details</button></a>
   </div>
   </div>
    
@@ -46,3 +45,77 @@
 </div>
 
   </div>
+-->
+
+    <div class="container">
+      <div class="filter-container">
+          <div class="filter-group">
+              <label for="difficulty">Difficulty</label>
+              <select 
+                  id="difficulty" 
+                  class="filter-select" 
+                  [(ngModel)]="selectedDifficulty" 
+                  (change)="applyFilters()"
+              >
+                  <option value="">All</option>
+                  <option 
+                      *ngFor="let difficulty of difficulties" 
+                      [value]="difficulty"
+                  >
+                      {{difficulty}}
+                  </option>
+              </select>
+          </div>
+          
+          <div class="filter-group">
+              <label for="tech-stack">Tech Stack</label>
+              <select 
+                  id="tech-stack" 
+                  class="filter-select"
+                  [(ngModel)]="selectedTechStack"
+                  (change)="applyFilters()"
+              >
+                  <option value="">All</option>
+                  <option 
+                      *ngFor="let stack of techStacks" 
+                      [value]="stack"
+                  >
+                      {{stack}}
+                  </option>
+              </select>
+          </div>
+          
+          <div class="filter-group">
+              <button class="search-button" (click)="applyFilters()">Search</button>
+          </div>
+    
+      </div>
+
+          <div class="bug-list">
+            <div *ngFor="let bug of filteredBugs" class="bug-card">
+            <div class="bug-header">
+            <h3>{{ bug.title }}</h3>
+            </div>
+            <p>{{ bug.description }}</p>
+             
+            <div class="bug-details">
+            <span class="difficulty">{{ bug.difficulty }}</span>
+            <span class="tech">{{ bug.techStack }}</span>
+            </div>
+             
+                
+            <div class="bug-icons">
+            <a href=''><span><img src="https://images.icon-icons.com/909/PNG/512/pdf_icon-icons.com_70898.png" alt="views"></span></a>
+            <a href=''><span><img src="https://cdn0.iconfinder.com/data/icons/file-format-24/32/3_file_format_compressed_zip-512.png" alt="people"></span></a>
+            <!-- </div>
+             
+                  <a href="/bug-details"><button class="see-details">See details</button></a>
+            </div> -->
+            </div>
+             
+            <div *ngIf="noBugsFound && (selectedDifficulty || selectedTechStack)" class="no-bugs">
+          </div>
+          
+            </div>
+    
+  

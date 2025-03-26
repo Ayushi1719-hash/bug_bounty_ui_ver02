@@ -9,6 +9,8 @@ import { DeveloperBugSelectionComponent } from './components/developer-bug-selec
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { ServicesComponent } from './components/services/services.component';
 import { CompanyComponent } from './components/company/company.component';
+import { BugDetailsComponent } from './components/bug-details/bug-details.component';
+import { BugFormComponent } from './components/bug-form/bug-form.component';
 
 export const routes: Routes = [
     {
@@ -37,6 +39,9 @@ export const routes: Routes = [
    {
     path: 'developer', component:DeveloperBugSelectionComponent, pathMatch: 'full'
 },
+{
+    path: 'bug-details', component:BugDetailsComponent, pathMatch: 'full'
+},
     
     {
         path: 'developer-bugs', component: DeveloperBugSelectionComponent, pathMatch: 'full'
@@ -44,7 +49,9 @@ export const routes: Routes = [
    {
     path:'leaderboard',component:LeaderboardComponent,pathMatch:'full'
 },
-
+{
+    path:'bug-form',component:BugFormComponent,pathMatch:'full'
+},
     {
         path: '', redirectTo: 'home', pathMatch: 'full'
     }

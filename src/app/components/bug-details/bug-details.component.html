@@ -1,0 +1,28 @@
+<div class="container">
+    <h2>Bug Details</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Description</th>
+          <th>Tech Stack</th>
+          <th>GitHub Link</th>
+          <th>Rewards</th>
+          <th>YouTube Link</th>
+          <th>Created At</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let bug of bugs">
+          <td>{{ bug.title }}</td>
+          <td>{{ bug.description }}</td>
+          <td>{{ bug.techStack }}</td>
+          <td><a [href]="bug.githubLink" target="_blank">GitHub</a></td>
+          <td>${{ bug.rewards }}</td>
+          <td><a [href]="bug.youtubeLink" target="_blank">Video</a></td>
+          <td>{{ bug.createdAt | date: 'short' }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  

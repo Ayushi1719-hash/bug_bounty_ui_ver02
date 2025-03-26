@@ -1,0 +1,64 @@
+<form [formGroup]="bugForm" (ngSubmit)="submitBug()" class="bug-form" enctype="multipart/form-data">
+  <h1>🐞 Submit a Bug</h1>
+   
+    <label>Title:</label>
+  <input type="text" formControlName="title" required placeholder="Enter bug title">
+   
+    <label>Description:</label>
+  <textarea formControlName="description" required placeholder="Describe the bug"></textarea>
+   
+    <label>Difficulty:</label>
+  <select formControlName="difficulty">
+  <option value="easy">Easy</option>
+  <option value="medium">Medium</option>
+  <option value="hard">Hard</option>
+  </select>
+   
+    <!-- Tech Stack with Multi-Select -->
+  <!-- <label>Tech Stack:</label>
+  <div class="tech-container">
+  <input type="text" placeholder="Add tech (e.g., Java, Angular)" #techInput (keyup.enter)="addTech(techInput)">
+  <div class="chips">
+  <span class="chip" *ngFor="let tech of selectedTechStack">
+          {{ tech }} <button type="button" (click)="removeTech(tech)">x</button>
+  </span>
+  </div>
+  </div> -->
+
+  <label>Tech Stack:</label>
+  <!-- <input type="text" formControlName="techStack" #techInput required placeholder="Enter Tech Stack"> -->
+  <select formControlName="techStack">
+    <option value="java">Java</option>
+    <option value="python">Python</option>
+    <option value="c++">C++</option>
+    </select>
+   
+    <label>Reward ($):</label>
+  <input type="number" formControlName="reward" required placeholder="Enter reward amount">
+   
+    <label>Deadline:</label>
+  <input type="date" formControlName="deadline" required>
+  <div *ngIf="bugForm.get('deadline')?.invalid && bugForm.get('deadline')?.touched" class="error">
+      Deadline is required.
+  </div>
+   
+    <label>Git Repository Link:</label>
+  <input type="url" formControlName="gitRepo" required placeholder="https://github.com/your-repo">
+  <div *ngIf="bugForm.get('gitRepo')?.invalid && bugForm.get('gitRepo')?.touched" class="error">
+      Enter a valid Git repository URL.
+  </div>
+
+
+    <!-- Zip File Upload -->
+  <label>Upload ZIP File:</label>
+  <input type="file" (change)="onFileSelected($event)" accept=".zip" required>
+  <div *ngIf="selectedFile" class="file-selected">
+      
+  </div>
+
+  <label>Upload PDF File:</label>
+  <input type="file" (change)="onPdfSelected($event)" accept=".pdf" required>
+  <div *ngIf="selectedPdfFile" class="file-selected"></div>
+   
+    <button type="submit" [disabled]="bugForm.invalid">Submit Bug</button>
+  </form>

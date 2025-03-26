@@ -9,12 +9,12 @@ import { Bug } from './bug.model';
   selector: 'app-developer-bug-selection',
   standalone: true,
   imports: [CommonModule, FormsModule],
-  templateUrl: './developer-bug-selection.component.html',
-  styleUrls: ['./developer-bug-selection.component.scss']
+  templateUrl: 'developer-bug-selection.component.html',
+  styleUrls: ['developer-bug-selection.component.scss']
 })
 export class DeveloperBugSelectionComponent implements OnInit {
   difficulties = ['Easy', 'Medium', 'Hard'];
-  techStacks = ['Java', 'Spring Boot', 'OAuth', 'Node.js', 'Express', 'MongoDB', 'React', 'CSS', 'MySQL', 'Stripe'];
+  techStacks = ['Java', 'Python', 'C++'];
  
   selectedDifficulty = '';
   selectedTechStack = '';
@@ -111,3 +111,5 @@ export class DeveloperBugSelectionComponent implements OnInit {
     });
   }
 }
+ 
+ 

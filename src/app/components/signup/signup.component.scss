@@ -180,10 +180,11 @@ $success-color: #28a745;
     color: white;
     border: none;
     border-radius: $border-radius;
-    font-size: 1rem;
-    font-weight: 600;
     cursor: pointer;
     transition: $transition;
+    font-size: 1rem;
+    font-weight: 600;
+    
  
     &:hover {
       background: linear-gradient(90deg, darken($primary-color, 10%) 0%, darken($secondary-color, 10%) 100%);

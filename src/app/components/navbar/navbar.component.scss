@@ -1,7 +1,7 @@
 .navbar {
     background-color: #14142B;
     color: white;
-    padding: 16px 0;
+    padding: 12px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
@@ -21,6 +21,13 @@
 
   .logo img {
     height: 24px;
+  }
+  .logo{
+    font-size:22px ;
+  }
+  .bug{
+    font-size: 2rem;
+    //filter: invert(100%) brightness(200%);
   }
 
   .navbar-right {
