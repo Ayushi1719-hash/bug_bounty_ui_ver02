@@ -1,131 +1,158 @@
-$primary-color: #007bff; // BugBounty Primary Blue
-$secondary-color: #f4b400; // Gold Accent
-$accent-color: #ff4081; // Bright Pink
-$dark-color: #1e293b; // Deep Navy Blue
-$light-color: #f8f9fa;
-$text-color: #343a40;
-$text-light: #6c757d;
-$border-radius: 10px;
-$box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-$transition: all 0.3s ease;
-$error-color: #dc3545;
-$success-color: #28a745;
+
+$primary-color: #6C5CE7;  // Purple accent from the design
+$background-dark: #1E1E2C;
+$text-light: #ffffff;
+$accent-background: rgba(255, 255, 255, 0.05);
+$input-background: rgba(255, 255, 255, 0.1);
+$border-color: rgba(108, 92, 231, 0.3);
 
 .bug-form {
-  max-width: 500px;
-  margin: 40px auto;
-  padding: 25px;
-  background: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: lighten($background-dark, 5%);
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  color: $text-light;
+
   h1 {
-    font-size: 24px;
-    color: #1E2A78;
-    margin-bottom: 20px;
+    font-size: 2.5rem;
+    color: white;
     text-align: center;
-    font-size: 1.8rem;
-    font-weight: 700;
-    color: $primary-color;
-    text-decoration: none;
-    margin-bottom: 1rem;
-    transition: $transition;
- 
-    &:hover {
-      color: darken($primary-color, 10%);
-    }
+   // margin-bottom: 2rem;
+    //border-bottom: 2px solid $border-color;
+    //padding-bottom: 1rem;
   }
 
   label {
     display: block;
     font-weight: 600;
-    margin-bottom: 8px;
-    margin-top: 10px;
-    // color: #1E2A78;
-    font-size: 16px;
-    font-weight: 700;
-    color: $dark-color;
+    margin-bottom: 0.75rem;
+    margin-top: 1rem;
+    color: $primary-color;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
   }
 
-  // Custom select and input styling
+  // Input, Textarea, Select Styling
   input, 
   textarea, 
   select {
     width: 100%;
-    padding: 12px;
-    border: 1px solid #BFD7ED;
+    padding: 0.75rem 1rem;
+    background-color: $input-background;
+    border: 1px solid $border-color;
     border-radius: 8px;
-    background-color: #F5F9FC;
-    color: #1E2A78;
-    font-size: 14px;
-    appearance: none; // Remove default styling
-    
+    color: $text-light;
+    transition: all 0.3s ease;
+
     &:focus {
       outline: none;
-      border-color: #007BFF;
-      box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
     }
 
     &::placeholder {
-      color: #8CA6C3;
+      color: rgba(255, 255, 255, 0.5);
     }
   }
+  option{
+    background-color: #3E3E4F;
+  }
 
-  // Custom select dropdown arrow
+  // Custom select dropdown
   select {
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M1 4l5 5 5-5' fill='none' stroke='%231E2A78' stroke-width='2'/%3E%3C/svg%3E");
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M1 4l5 5 5-5' fill='none' stroke='%236C5CE7' stroke-width='2'/%3E%3C/svg%3E");
     background-repeat: no-repeat;
-    background-position: right 12px center;
-    padding-right: 30px;
+    background-position: right 1rem center;
+    padding-right: 2rem;
   }
 
   // File input styling
   input[type="file"] {
-    border: 1px dashed #BFD7ED;
-    background-color: #F5F9FC;
+    border: 2px dashed $border-color;
+    background-color: $input-background;
     cursor: pointer;
 
     &::file-selector-button {
-      margin-right: 10px;
-      padding: 8px 12px;
-      background-color: #007BFF;
-      color: white;
+      margin-right: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: $primary-color;
+      color: $text-light;
       border: none;
-      border-radius: 4px;
+      border-radius: 6px;
       cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    &::file-selector-button:hover {
+      background-color: darken($primary-color, 10%);
     }
   }
 
   // Error message styling
   .error {
-    color: #DC3545;
-    font-size: 12px;
-    margin-top: 5px;
+    color: #FF4136;  // Bright red for errors
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
   }
 
   // Submit button
   button {
     width: 100%;
-    padding: 12px;
-    margin-top: 20px;
-    background: linear-gradient(90deg, $primary-color 0%, $secondary-color 100%);
-    color: white;
+    padding: 1rem;
+    margin-top: 1.5rem;
+    background-color: $primary-color;
+    color: $text-light;
     border: none;
-    border-radius: $border-radius;
+    border-radius: 10px;
     cursor: pointer;
-    transition: $transition;
-    font-size: 16px;
+    font-size: 1rem;
     font-weight: 600;
-    
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
     &:hover {
-      background: linear-gradient(90deg, darken($primary-color, 10%) 0%, darken($secondary-color, 10%) 100%);
+      background-color: darken($primary-color, 10%);
+      transform: translateY(-2px);
     }
- 
+
     &:disabled {
       opacity: 0.6;
       cursor: not-allowed;
+      transform: none;
     }
-
-    
   }
+
+  // File selected indicator
+  .file-selected {
+    background-color: $accent-background;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border-radius: 6px;
+    color: $primary-color;
+    font-size: 0.9rem;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 600px) {
+  .bug-form {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+img{
+  height:40px;
+}
+.head{
+  display:flex;
+  border-bottom: 2px solid $border-color;
+  text-align: center;
+  justify-content:center;
 }

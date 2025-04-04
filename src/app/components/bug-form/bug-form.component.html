@@ -1,5 +1,10 @@
+<app-navbar-comp></app-navbar-comp>
 <form [formGroup]="bugForm" (ngSubmit)="submitBug()" class="bug-form" enctype="multipart/form-data">
-  <h1>🐞 Submit a Bug</h1>
+  <!-- <h1>🐞 Submit a Bug</h1> -->
+   <div class="head">
+  <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/bug-177-468530.png">
+  <h1>Submit a Bug</h1>
+  </div>
    
     <label>Title:</label>
   <input type="text" formControlName="title" required placeholder="Enter bug title">

@@ -1,7 +1,7 @@
 .navbar {
     background-color: #14142B;
     color: white;
-    padding: 12px 0;
+    padding: 19px 0;
     border-bottom: 1px solid rgba(255, 255, 255, 0.1);
   }
 
@@ -20,7 +20,8 @@
   }
 
   .logo img {
-    height: 24px;
+    height: 40px;
+    margin-right: 5px;
   }
   .logo{
     font-size:22px ;
@@ -44,7 +45,7 @@
   .nav-link {
     color: white;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 14px;
     white-space: nowrap;
   }
 
@@ -57,7 +58,7 @@
   .auth-link {
     color: white;
     text-decoration: none;
-    font-size: 16px;
+    font-size: 18px;
     white-space: nowrap;
   }
 

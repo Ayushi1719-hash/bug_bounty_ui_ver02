@@ -11,6 +11,14 @@ import { ServicesComponent } from './components/services/services.component';
 import { CompanyComponent } from './components/company/company.component';
 import { BugDetailsComponent } from './components/bug-details/bug-details.component';
 import { BugFormComponent } from './components/bug-form/bug-form.component';
+import { DevSolutionComponent } from './components/dev-solution/dev-solution.component';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { CompanyEditBugComponent } from './components/company-edit-bug/company-edit-bug.component';
+import { BugDetailsCompanyComponent } from './components/bug-details-company/bug-details-company.component';
+import { ForgotPasswordComponent } from './components/forgot-password/forgot-password.component';
+import { VerifyForgotPasswordOtpComponent } from './components/verify-forgot-password-otp/verify-forgot-password-otp.component';
+import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
+import { GithubComponent } from './components/github/github.component';
 
 export const routes: Routes = [
     {
@@ -38,20 +46,28 @@ export const routes: Routes = [
    },
    {
     path: 'developer', component:DeveloperBugSelectionComponent, pathMatch: 'full'
-},
-{
-    path: 'bug-details', component:BugDetailsComponent, pathMatch: 'full'
-},
-    
-    {
-        path: 'developer-bugs', component: DeveloperBugSelectionComponent, pathMatch: 'full'
-   },
+    },
+    { path: 'bug/:id', component: BugDetailsComponent },
+    { path: 'bugCompany/:id', component: BugDetailsCompanyComponent },
    {
     path:'leaderboard',component:LeaderboardComponent,pathMatch:'full'
-},
-{
+    },
+    {
     path:'bug-form',component:BugFormComponent,pathMatch:'full'
-},
+    },
+    {
+    path:'dev-sol/:id',component:DevSolutionComponent,pathMatch:'full'
+    },
+    {
+    path:'company-edit-bug/:id',component:CompanyEditBugComponent,pathMatch:'full'
+    },
+    {
+    path:'admin',component:AdminDashboardComponent,pathMatch:'full'
+    },
+{ path: 'forgot-password', component: ForgotPasswordComponent },
+  { path: 'verify-forgot-password-otp', component: VerifyForgotPasswordOtpComponent },
+  { path: 'github/:bugId/:gitRepoSubmitted/:id', component: GithubComponent },
+  { path: 'reset-password', component: ResetPasswordComponent },
     {
         path: '', redirectTo: 'home', pathMatch: 'full'
     }

@@ -1,0 +1,22 @@
+<div *ngIf="pdfSrc; else loadingTemplate" class="pdf-container">
+  <pdf-viewer
+    [src]="$any(pdfSrc)"
+    [render-text]="true"
+    [show-all]="false"
+    [original-size]="true"
+    [fit-to-page]="true"
+    [zoom]="1.2">
+  </pdf-viewer>
+</div>
+
+<ng-template #loadingTemplate>
+  <div class="pdf-loader">
+    Loading PDF... Please Wait
+  </div>
+</ng-template>
+
+<div class="download-container">
+  <button (click)="downloadZip()" class="download-btn">
+    {{ zipFileName ? zipFileName : 'Download ZIP' }}
+  </button>
+</div>

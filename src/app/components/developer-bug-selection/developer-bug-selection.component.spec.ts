@@ -1,6 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { DeveloperBugSelectionComponent } from './developer-bug-selection.component';
+import { NgModule } from '@angular/core';
 
 describe('DeveloperBugSelectionComponent', () => {
   let component: DeveloperBugSelectionComponent;
@@ -8,7 +9,7 @@ describe('DeveloperBugSelectionComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [DeveloperBugSelectionComponent]
+      imports: [DeveloperBugSelectionComponent,NgModule]
     })
     .compileComponents();
 

@@ -103,6 +103,32 @@ export class AuthService {
   isLoggedIn(): boolean {
     return !!this.currentUserValue;
   }
+
+  forgotPassword(email: string): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'forgot-password',
+      { email },
+      httpOptions
+    );
+  }
+ 
+  verifyForgotPasswordOtp(email: string, otp: string): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'verify-forgot-password-otp',
+      { email, otp },
+      httpOptions
+    );
+  }
+ 
+  resetPassword(email: string, otp: string, newPassword: string): Observable<any> {
+    return this.http.post(
+      AUTH_API + 'reset-password',
+      { email, otp, newPassword },
+      httpOptions
+    );
+  }
+ 
+ 
 }
 
  

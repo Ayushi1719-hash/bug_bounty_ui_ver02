@@ -1,191 +1,138 @@
-// Color Variables
-$primary-color: #007bff; // BugBounty Primary Blue
-$secondary-color: #f4b400; // Gold Accent
-$accent-color: #ff4081; // Bright Pink
-$dark-color: #1e293b; // Deep Navy Blue
-$light-color: #f8f9fa; // Light Background
-$text-color: #343a40; // Dark Text Color
-$text-light: #6c757d; // Light Text Color
-$border-radius: 10px;
-$box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
-$transition: all 0.3s ease;
-$error-color: #dc3545; // Error color
-$success-color: #28a745; // Success color
+.services-section {
+  background-color: #14142B;
+  padding: 4rem 0;
+ 
+  .services-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
 
-// Global Body Background Color
-body {
-  background-color: $dark-color; // Apply a light background color for the whole website
-  color: $text-color; // Ensure text is legible on light backgrounds
-  font-family: 'Arial', sans-serif; // Set a default font for better readability
-  margin: 0;
-  padding: 0;
-}
-
-// General Page Styling
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
-}
-
-header {
-  background: linear-gradient(135deg, $primary-color 0%, $dark-color 100%);
-  color: white;
-  padding: 2rem 0;
-  text-align: center;
-
-  h1 {
+  .section-title {
+    text-align: center;
     font-size: 2.5rem;
-    margin-bottom: 0.5rem;
+    margin-bottom: 3rem;
+    color: #f0e9e9;
   }
 
-  .tagline {
-    font-size: 1.2rem;
-    font-weight: 300;
-  }
-}
-
-// Introduction Section
-.intro {
-  background-color: $light-color;
-  color: $text-color;
-  padding: 2rem;
-  font-size: 1.2rem;
-  border-radius: $border-radius;
-  margin-bottom: 2rem;
-}
-
-h2 {
-  font-size: 2.5rem; // Larger font size for heading
-  font-weight: 600; // Bold weight for better emphasis
-  color: $primary-color; // Use primary color for the heading
-  margin-bottom: 1.5rem; // Space below the heading
-  text-align: center;
-}
-
-// Services Section
-.services {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  gap: 2rem;
-  padding: 2rem 0;
-}
-
-.service {
-  background: white;
-  padding: 2rem;
-  border-radius: $border-radius;
-  box-shadow: $box-shadow;
-  transition: $transition;
-  color: $text-color;
-
-  &:hover {
-    background: linear-gradient(135deg, $primary-color 0%, $dark-color 1000%);
-    transform: translateY(-5px);
-    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-bottom: 3rem;
   }
 
-  i {
-    font-size: 2.5rem;
-    color: $dark-color;
-    margin-bottom: 1rem;
-  }
-
-  h3 {
-    font-size: 1.5rem;
-    margin-bottom: 1rem;
-    color: $dark-color;
-  }
-
-  p {
-    font-size: 1rem;
-    color: $text-light;
-  }
-}
-
-// Footer
-footer {
-  text-align: center;
-  background: $dark-color;
-  color: white;
-  padding: 1rem;
-  margin-top: 2rem;
-}
-
-// Call to Action Section
-.cta {
-  background: linear-gradient(90deg, #14142B, #14142B);
-  padding: 3rem;
-  border-radius: $border-radius;
-  color: white;
-  text-align: center;
-  margin-top: 2rem;
-
-  h2 {
-    font-size: 2rem;
-    margin-bottom: 1rem;
-  }
-
-  .cta-button {
-    background: white;
-    color: black;
-    padding: 1rem 2rem;
-    font-size: 1.2rem;
-    font-weight: bold;
-    border-radius: $border-radius;
-    text-decoration: none;
-    transition: $transition;
+  .service-card {
+    background-color: rgb(181, 199, 235);
+    border-radius: 10px;
+    padding: 2rem;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     &:hover {
-      background: $secondary-color;
+      transform: translateY(-10px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+  }
+
+  .service-icon {
+    font-size: 3rem;
+    color: #007bff;
+    margin-bottom: 1rem;
+    text-align: center;
+  }
+
+  .service-title {
+    text-align: center;
+    margin-bottom: 1rem;
+    color: #0d0d0d;
+    font-size: 1.5rem;
+
+    strong {
+      font-weight: 700;
+    }
+  }
+
+  .service-description {
+    color: #131212;
+    line-height: 1.6;
+    text-align: center;
+  }
+
+  .services-cta {
+    text-align: center;
+    background-color:rgb(181, 199, 235) ;
+    padding: 3rem;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #333;
+    }
+
+    p {
+      color: #0d0d0d;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      line-height: 1.6;
+    }
+
+    .cta-button {
+      background-color: #007bff;
       color: white;
+      border: none;
+      padding: 1rem 2rem;
+      border-radius: 5px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: #0056b3;
+      }
     }
   }
 }
-// Error and Success Messages
-.error-message {
-  background-color: $error-color;
+
+/* Footer Styles */
+.site-footer {
+  background-color: #14142B;
   color: white;
-  padding: 1rem;
-  border-radius: $border-radius;
-  margin-top: 1rem;
-}
+  padding: 2rem 0;
+  text-align: center;
 
-.success-message {
-  background-color: $success-color;
-  color: white;
-  padding: 1rem;
-  border-radius: $border-radius;
-  margin-top: 1rem;
-}
+  .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
 
-// Links Styling
-a {
-  color: $primary-color;
-  text-decoration: none;
-  transition: $transition;
+  .copyright {
+    margin-bottom: 1rem;
+  }
 
-  &:hover {
-    color: $accent-color;
+  .social-links {
+    a.social-link {
+      color: #007bff;
+      text-decoration: none;
+      margin: 0 0.5rem;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: #0056b3;
+        text-decoration: underline;
+      }
+    }
   }
 }
 
-// Buttons and Links
-button,
-a.button {
-  background: $primary-color;
-  color: white;
-  padding: 1rem 2rem;
-  border-radius: $border-radius;
-  font-size: 1.2rem;
-  font-weight: bold;
-  border: none;
-  transition: $transition;
-  text-decoration: none;
-
-  &:hover {
-    background: $accent-color;
-    transform: translateY(-2px);
+/* Responsive Adjustments */
+@media screen and (max-width: 768px) {
+  .services-section {
+    .services-grid {
+      grid-template-columns: 1fr;
+    }
   }
 }

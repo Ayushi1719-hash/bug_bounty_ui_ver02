@@ -1,0 +1,100 @@
+<app-navbar-admin></app-navbar-admin>
+<div *ngIf="loading" class="loading-container">
+  <div class="spinner"></div>
+  <p>Loading Bug Details...</p>
+</div>
+
+<div *ngIf="error" class="error-container">
+  <div class="error-message">
+    <h2>Oops! Something went wrong</h2>
+    <p>{{ error }}</p>
+    <a routerLink="/developer" class="back-button">Back to List</a>
+  </div>
+</div>
+
+<div *ngIf="bug" class="bug-details-container">
+  <div class="bug-details">
+    <div class="bug-header">
+      <h2>{{ bug.title }}</h2>
+      <span 
+      [ngClass]="getStatusColor(bug.status)" class="text-white px-3 py-1 rounded-full">
+        {{ bug.status }}
+      </span>
+    </div>
+    
+    <div class="bug-details-grid">
+      <div class="bug-info-column">
+        <div class="info-card">
+          <h3>Bug Description</h3>
+          <p>{{ bug.description }}</p>
+        </div>
+        
+        <div class="info-card">
+          <h3>Technical Details</h3>
+          <div class="tech-details">
+            <div class="detail-item">
+              <span class="detail-label">Difficulty:</span>
+              <span [ngClass]="getDifficultyColor(bug.difficulty)">
+                {{ bug.difficulty }}
+              </span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Tech Stack:</span>
+              <span>{{ bug.techStack }}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      
+      <div class="bug-info-column">
+        <div class="info-card">
+          <h3>Project Information</h3>
+          <div class="project-details">
+            <div class="detail-item">
+              <span class="detail-label">Deadline:</span>
+              <span>{{ bug.deadline }}</span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Reward:</span>
+              <span class="text-green-500 font-bold">
+                ${{ bug.reward.toLocaleString() }}
+              </span>
+            </div>
+            <div class="detail-item">
+              <span class="detail-label">Git Repository:</span>
+              <a 
+                [href]="bug.gitRepo" 
+                target="_blank" 
+                class="git-repo-link">
+                View Repository
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="submit-sol">
+      <a [routerLink]="['/company-edit-bug', bug?.id]" [queryParams]="{ createdBy: bug?.createdBy }" class="solution-button">
+        Edit Posted Bug
+      </a>
+    </div>
+
+    <div class="end">
+    <div class="pdf-section">
+      <app-pdf-viewer *ngIf="bug.id" [bugId]="bug.id"></app-pdf-viewer>
+    </div>
+
+    
+
+    <div class="actions-container">
+      <a routerLink="/company" class="back-button">
+        Back to Bug List
+      </a>
+    </div>
+
+    
+  </div>
+  </div>
+</div>

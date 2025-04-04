@@ -1,0 +1,112 @@
+<app-navbar-admin></app-navbar-admin>
+<form (ngSubmit)="onSubmit()" class="bug-form">
+    <div class="head">
+        <img src="https://cdn.iconscout.com/icon/premium/png-512-thumb/bug-177-468530.png">
+        <h1>Edit the Bug</h1>
+        </div>
+    <div>
+      <label for="title">Title</label>
+      <input type="text" [(ngModel)]="bugData.title" name="title" required>
+    </div>
+    <div>
+      <label for="description">Description</label>
+      <textarea [(ngModel)]="bugData.description" name="description" required></textarea>
+    </div>
+    <div>
+      <label for="difficulty">Difficulty</label>
+      <select [(ngModel)]="bugData.difficulty" name="difficulty" required>
+        <option value="easy">Easy</option>
+        <option value="medium">Medium</option>
+        <option value="hard">Hard</option>
+      </select>
+    </div>
+    <div>
+      <label for="reward">Reward</label>
+      <input type="number" [(ngModel)]="bugData.reward" name="reward" required>
+    </div>
+    <div>
+      <label for="status">Bug Status</label>
+      <select [(ngModel)]="bugData.status" name="status" required>
+        <option value="Open">Open</option>
+        <option value="Reviewed">Reviewed</option>
+        <option value="Resolved">Resolved</option>
+      </select>
+    </div>
+    <div>
+      <label for="deadline">Deadline</label>
+      <input type="date" [(ngModel)]="bugData.deadline" name="deadline" required>
+    </div>
+    <div>
+      <label for="gitRepo">Git Repository URL</label>
+      <input type="text" [(ngModel)]="bugData.gitRepo" name="gitRepo" required>
+    </div>
+    <div>
+      <label for="techStack">Tech Stack</label>
+      <input type="text" [(ngModel)]="bugData.techStack" name="techStack" required>
+    </div>
+
+    <!-- <div>
+      <label for="zipFile">Upload ZIP File</label>
+      <input type="file" (change)="onFileChange($event, 'zipFile')">
+
+      <div *ngIf="bugData.zipFilePath">
+        <a [href]="bugData.zipFilePath" download>{{ getFileName(bugData.zipFilePath) }}</a>
+      </div>
+    </div>
+    <div>
+      <label for="pdfFile">Upload PDF File</label>
+      <input type="file" (change)="onFileChange($event, 'pdfFile')">
+
+      <div *ngIf="bugData.pdfFilePath">
+        <a [href]="bugData.pdfFilePath" download>{{ getFileName(bugData.pdfFilePath) }}</a>
+      </div>
+    </div> -->
+
+    <!-- <div>
+        <label for="zipFile">Upload ZIP File</label>
+        <input type="file" (change)="onFileChange($event, 'zipFile')">
+      
+        
+        <div *ngIf="bugData.zipFilePath">
+            <a [href]="bugData.zipFilePath" download>{{ getFileName(bugData.zipFilePath) }}</a>
+        </div>
+      </div> -->
+      
+      <!-- <div>
+        <label for="pdfFile">Upload PDF File</label>
+        <input type="file" (change)="onFileChange($event, 'pdfFile')">
+      
+        
+        <div *ngIf="bugData.pdfFilePath">
+            <a [href]="bugData.pdfFilePath" download>{{ getFileName(bugData.pdfFilePath) }}</a>
+          </div>
+      </div> -->
+
+      <div>
+        <label for="zipFile">Upload ZIP File</label>
+        <input type="file" (change)="onFileChange($event, 'zipFile')">
+        <!-- Show existing ZIP file with a small download button below -->
+        <div *ngIf="bugData.zipFilePath">
+        <p>{{ getFileName(bugData.zipFilePath) }}</p>
+        <!-- <button (click)="downloadZip()" class="small-download-btn">Download ZIP</button> -->
+        </div>
+      </div>
+        
+      <div>
+        <label for="pdfFile">Upload PDF File</label>
+        <input type="file" (change)="onFileChange($event, 'pdfFile')">
+        <!-- Show existing PDF file with a small download button below -->
+        <div *ngIf="bugData.pdfFilePath">
+        <p>{{ getFileName(bugData.pdfFilePath) }}</p>
+        <!-- <button (click)="downloadPdf()" class="small-download-btn">Download PDF</button> -->
+        </div>
+      </div>
+        
+         
+    <div class="end">
+    <button type="submit">Update Bug</button><br>
+    <button type="button" (click)="goBack()" class="goBack">Back</button>
+  </div> 
+    
+  </form>
+  

@@ -1,0 +1,171 @@
+
+$primary-color: #6C5CE7;  // Purple accent from the design
+$background-dark: #1E1E2C;
+$text-light: #ffffff;
+$accent-background: rgba(255, 255, 255, 0.05);
+$input-background: rgba(255, 255, 255, 0.1);
+$border-color: rgba(108, 92, 231, 0.3);
+
+.bug-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2.5rem;
+  background-color: lighten($background-dark, 5%);
+  border-radius: 16px;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+  color: $text-light;
+
+  h1 {
+    font-size: 2.5rem;
+    color: white;
+    text-align: center;
+   // margin-bottom: 2rem;
+    //border-bottom: 2px solid $border-color;
+    //padding-bottom: 1rem;
+  }
+
+  label {
+    display: block;
+    font-weight: 400;
+    margin-bottom: 0.75rem;
+    margin-top: 1rem;
+    color: white;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+  }
+
+  // Input, Textarea, Select Styling
+  input, 
+  textarea, 
+  select {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    background-color: $input-background;
+    border: 1px solid $border-color;
+    border-radius: 8px;
+    color: $text-light;
+    transition: all 0.3s ease;
+
+    &:focus {
+      outline: none;
+      border-color: $primary-color;
+      box-shadow: 0 0 0 3px rgba(108, 92, 231, 0.2);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  // Custom select dropdown
+  select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath d='M1 4l5 5 5-5' fill='none' stroke='%236C5CE7' stroke-width='2'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    padding-right: 2rem;
+  }
+
+  // File input styling
+  input[type="file"] {
+    border: 2px dashed $border-color;
+    background-color: $input-background;
+    cursor: pointer;
+
+    &::file-selector-button {
+      margin-right: 1rem;
+      padding: 0.5rem 1rem;
+      background-color: $primary-color;
+      color: $text-light;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+    }
+
+    &::file-selector-button:hover {
+      background-color: darken($primary-color, 10%);
+    }
+  }
+
+  // Error message styling
+  .error {
+    color: #FF4136;  // Bright red for errors
+    font-size: 0.85rem;
+    margin-top: 0.5rem;
+  }
+
+  // Submit button
+  button {
+    width: 17%;
+    padding: 7px;
+    margin-top: 1.5rem;
+    background-color: $primary-color;
+    color: $text-light;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+
+    &:hover {
+      background-color: darken($primary-color, 10%);
+      transform: translateY(-2px);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+      transform: none;
+    }
+  }
+  .buttons{
+    display: flex;
+    justify-content: space-between;
+  }
+
+  // File selected indicator
+  .file-selected {
+    background-color: $accent-background;
+    padding: 0.5rem;
+    margin-top: 0.5rem;
+    border-radius: 6px;
+    color: $primary-color;
+    font-size: 0.9rem;
+  }
+}
+
+// Responsive adjustments
+@media (max-width: 600px) {
+  .bug-form {
+    margin: 1rem;
+    padding: 1.5rem;
+  }
+}
+
+img{
+  height:40px;
+}
+.head{
+  display:flex;
+  border-bottom: 2px solid $border-color;
+  text-align: center;
+  justify-content:center;
+}
+
+.submission-message {
+    color: #6C5CE7;  // Match primary color
+    font-size: 1rem;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 1rem;
+    background: rgba(108, 92, 231, 0.1);
+    padding: 0.75rem;
+    border-radius: 8px;
+  }
+  

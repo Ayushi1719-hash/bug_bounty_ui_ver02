@@ -241,3 +241,52 @@ $success-color: #28a745;
   font-size: 0.9rem;
   text-align: center;
 }
+
+.social-login {
+  text-align: center;
+  margin-top: 1rem;
+ 
+  .divider {
+    margin-bottom: 1rem;
+    color: $text-light;
+    font-size: 0.9rem;
+    position: relative;
+    text-transform: uppercase;
+    font-weight: bold;
+  }
+ 
+  .auth-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: $border-radius;
+    font-size: 1rem;
+    font-weight: 400;
+    cursor: pointer;
+    transition: $transition;
+    margin-bottom: 0.75rem;
+    background: linear-gradient(90deg, $primary-color 0%, $secondary-color 100%);
+    color: white;
+
+
+    &:hover {
+      background: linear-gradient(90deg, darken($primary-color, 10%) 0%, darken($secondary-color, 10%) 100%);
+    }
+ 
+    .auth-logo {
+      width: 20px;
+      height: 20px;
+      margin-right: 10px;
+      //filter: invert(0%); // Make logos white for better contrast
+    }
+  }
+}
+.auth-logo {
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  //filter: invert(0%); // Make logos white for better contrast
+}

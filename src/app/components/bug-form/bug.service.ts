@@ -13,4 +13,10 @@ export class BugService {
   submitBug(formData: FormData): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/submit`, formData);
   }
+
+  private baseUrl = 'http://localhost:8081/api/bugs';
+
+  getBugById(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/${id}`);
+  }
 }

@@ -8,11 +8,12 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../app/services.service';
+import { NavbarComponent } from "../navbar/navbar.component";
 
 @Component({
   selector: 'app-signup',
   standalone: true,
-  imports: [CommonModule, RouterLink, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, NavbarComponent],
   providers: [AuthService],
   templateUrl: './signup.component.html',
   styleUrl: './signup.component.scss',
@@ -73,8 +74,8 @@ export class SignupComponent {
           next: (response) => {
             this.isSubmitting = false;
             this.otpVisible = true;
-            this.successMessage =
-              response.message || 'OTP sent to your email. Please verify.';
+            // this.successMessage =
+            //   response.message || 'OTP sent to your email. Please verify.';
           },
           error: (err) => {
             this.isSubmitting = false;

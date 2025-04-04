@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="auth-container">
     <div class="auth-card">
       <div class="auth-header">
@@ -127,9 +128,9 @@
             <input type="checkbox" id="remember" />
             <label for="remember">Remember me</label>
           </div>
-          <a routerLink="/forgot-password" class="forgot-password"
-            >Forgot password?</a
-          >
+          <p class="forgot-password">
+            <a (click)="goToForgotPassword()">Forgot Password?</a>
+          </p> 
         </div>
   
         <div *ngIf="errorMessage" class="error-alert">
@@ -137,9 +138,26 @@
         </div>
   
         <button type="submit" class="btn-submit" [disabled]="isSubmitting">
+          <img src="https://www.svgrepo.com/show/334064/log-in-circle.svg" alt="Google Logo" class="auth-logo" />
           <span *ngIf="!isSubmitting">Log In</span>
           <span *ngIf="isSubmitting" class="spinner"></span>
         </button>
+
+        <div class="social-login">
+          <p class="divider">or</p>
+          <!-- Google Login Button -->
+          <button class="auth-btn google-btn" (click)="loginWithGoogle()">
+          <img src="https://www.svgrepo.com/show/521691/google-chrome.svg" alt="Google Logo" class="auth-logo" />
+              Sign in with Google
+          </button>
+           
+            <!-- GitHub Login Button -->
+          <button class="auth-btn github-btn" (click)="loginWithGitHub()">
+          <img src="https://www.svgrepo.com/show/512317/github-142.svg" alt="GitHub Logo" class="auth-logo" />
+              Sign in with GitHub
+          </button>
+          </div>
+
       </form>
   
       <div class="auth-footer">

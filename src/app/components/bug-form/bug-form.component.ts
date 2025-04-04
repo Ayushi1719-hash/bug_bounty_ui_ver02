@@ -5,12 +5,14 @@ import { FormGroup, FormControl, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../app/services.service';
+import { NavbarCompComponent } from "../navbar-comp/navbar-comp.component";
+import { Router } from '@angular/router';
 // import { AuthService } from '../../../services.service';
  
 @Component({
   selector: 'app-bug-form',
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, NavbarCompComponent],
   templateUrl: './bug-form.component.html',
   styleUrls: ['./bug-form.component.scss']
 })
@@ -32,21 +34,8 @@ export class BugFormComponent {
     pdfFilePath: new FormControl<File | null>(null, Validators.required)
     });
  
-  constructor(private bugService: BugService, private http: HttpClient, private authService: AuthService) {}
+  constructor(private bugService: BugService, private http: HttpClient, private authService: AuthService,private router: Router) {}
  
-  // addTech(input: HTMLInputElement) {
-  //   const tech = input.value.trim();
-  //   if (tech && !this.selectedTechStack.includes(tech)) {
-  //     this.selectedTechStack.push(tech);
-  //     this.bugForm.get('techStack')?.setValue([...this.selectedTechStack]);
-  //     input.value = ''; // Clear input field after adding
-  //   }
-  // }
- 
-  // removeTech(tech: string) {
-  //   this.selectedTechStack = this.selectedTechStack.filter(t => t !== tech);
-  //   this.bugForm.get('techStack')?.setValue([...this.selectedTechStack]); 
-  // }
  
   onFileSelected(event: any) {
     if (event.target.files.length > 0) {
@@ -99,6 +88,7 @@ export class BugFormComponent {
           // this.selectedTechStack = [];
           this.selectedFile = null;
           this.selectedPdfFile = null;
+          this.router.navigate(['/company']); 
         },
         error: (err) => {
           console.error('Submission error:', err);

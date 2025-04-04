@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterLink } from '@angular/router';
 import {
@@ -8,17 +8,21 @@ import {
   Validators,
 } from '@angular/forms';
 import { AuthService } from '../../app/services.service';
+import { NavbarComponent } from "../navbar/navbar.component";
+import { Auth } from '@angular/fire/auth';
+import { signInWithPopup, GoogleAuthProvider, GithubAuthProvider } from 'firebase/auth';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [CommonModule, RouterLink, ReactiveFormsModule],
+  imports: [CommonModule, RouterLink, ReactiveFormsModule, NavbarComponent],
   providers: [AuthService],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
 })
 export class LoginComponent {
+  auth=inject(Auth);
   loginForm: FormGroup;
   isSubmitting = false;
   showPassword = false;
@@ -46,11 +50,16 @@ export class LoginComponent {
         .subscribe({
           next: (response) => {
             // Store token & role in localStorage or a service
+            console.log(response);
             localStorage.setItem('token', response.token);
             localStorage.setItem('userRole', response.role);
+            localStorage.setItem('userId',response.id);
   
-            // Redirect based on role
-            if (response.roles[0]==='company') {
+            // Redirect based on 
+            if(response.id==12){
+              this.router.navigate(['/admin']);
+            }
+            else if (response.roles[0]==='company') {
               this.router.navigate(['/company']);
             } else if (response.roles[0]==='developer') {
               this.router.navigate(['/developer']);
@@ -77,6 +86,51 @@ export class LoginComponent {
   togglePasswordVisibility() {
     this.showPassword = !this.showPassword;
   }
+
+  goToForgotPassword() {
+    this.router.navigate(['/forgot-password']);
+  }
+
+  async loginWithGoogle() {
+
+    try {
+
+      const result = await signInWithPopup(this.auth, new GoogleAuthProvider());
+
+      console.log("✅ Google Login Success:", result.user);
+
+      localStorage.setItem('token',await result.user.getIdToken());
+
+      this.router.navigate(['/select-role']);
+
+    } catch (error) {
+
+      console.error("❌ Google Login Error:", error);
+
+    }
+
+  }
+
+  async loginWithGitHub() {
+
+    try {
+
+      const result = await signInWithPopup(this.auth, new GithubAuthProvider());
+
+      console.log("✅ GitHub Login Success:", result.user);
+
+      localStorage.setItem('token',await result.user.getIdToken());
+
+      this.router.navigate(['/select-role']);
+
+    } catch (error) {
+
+      console.error("❌ GitHub Login Error:", error);
+
+    }
+
+  }
+ 
 
 }
  

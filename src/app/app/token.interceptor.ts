@@ -5,8 +5,9 @@ import {
   HttpEvent,
   HttpInterceptor,
   HTTP_INTERCEPTORS,
+  HttpResponse,
 } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { catchError, map, Observable } from 'rxjs';
 import { AuthService } from './services.service'; 
 
 @Injectable()
@@ -18,14 +19,23 @@ export class TokenInterceptor implements HttpInterceptor {
     next: HttpHandler
   ): Observable<HttpEvent<any>> {
     const currentUser = this.authService.currentUserValue;
+    console.log(request.url.startsWith('https://api.github.com'));
+    if(!request.url.startsWith('https://api.github.com')){
     if (currentUser && currentUser.token) {
       request = request.clone({
         setHeaders: {
           Authorization: `Bearer ${currentUser.token}`,
         },
       });
-    }
-    return next.handle(request);
+    }}
+    return next.handle(request)
+      .pipe(
+        // @ts-ignore
+        catchError((e: any, ca: any) => {
+            console.log('in interceptor ', e, ca);
+            
+        }),
+      );
   }
 }
 

@@ -1,0 +1,126 @@
+.navbar {
+    background-color: #14142B;
+    color: white;
+    padding: 19px 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 16px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .navbar-left {
+    display: flex;
+    align-items: center;
+  }
+
+  .logo img {
+    height: 40px;
+    margin-right: 5px;
+  }
+  .logo{
+    font-size:22px ;
+  }
+  .bug{
+    font-size: 2rem;
+    //filter: invert(100%) brightness(200%);
+  }
+
+  .navbar-right {
+    display: flex;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .nav-dropdown-links {
+    display: flex;
+    gap: 24px;
+  }
+
+  .nav-link {
+    color: white;
+    text-decoration: none;
+    font-size: 16px;
+    white-space: nowrap;
+  }
+
+  .navbar-actions {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .auth-link {
+    color: white;
+    text-decoration: none;
+    font-size: 23px;
+    white-space: nowrap;
+  }
+
+  .contact-us-button {
+    background-color: #E95252;
+    color: white;
+    text-decoration: none;
+    border-radius: 2px;
+    padding: 10px 20px;
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    white-space: nowrap;
+  }
+  .contact-us-button:hover{
+    background-color: #ff0000;
+  }
+
+  @media (max-width: 992px) {
+    .navbar-right {
+      gap: 20px;
+    }
+    
+    .nav-dropdown-links {
+      display: none;
+    }
+    
+    .navbar-actions {
+      gap: 16px;
+    }
+  }
+  .button-63 {
+    background: linear-gradient(to bottom right, #EF4765, #FF9A5A);
+    border: 0;
+    border-radius: 12px;
+    color: #FFFFFF;
+    cursor: pointer;
+    display: inline-block;
+    font-family: -apple-system,system-ui,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 2.5;
+    outline: transparent;
+    padding: 0 1rem;
+    text-align: center;
+    text-decoration: none;
+    transition: box-shadow .2s ease-in-out;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    white-space: nowrap;
+  }
+  
+  .button-63:not([disabled]):focus {
+    box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+  }
+  
+  .button-63:not([disabled]):hover {
+    box-shadow: 0 0 .25rem rgba(0, 0, 0, 0.5), -.125rem -.125rem 1rem rgba(239, 71, 101, 0.5), .125rem .125rem 1rem rgba(255, 154, 90, 0.5);
+  }
+  svg{
+    margin-top:-4px;
+  }
+  

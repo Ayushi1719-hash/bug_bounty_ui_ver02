@@ -1,0 +1,62 @@
+<app-navbar-admin></app-navbar-admin>
+<nav class="navbar">
+    <div class="containers">
+      <div class="navbar-right">
+        <div class="navbar-actions">
+            <button (click)="goBack()" class="button-62" >BACK</button>
+            <button (click)="acceptBug()" class="button-63">ACCEPT</button>
+            <!-- <a href="/home" class="button-reject"> -->
+            <button (click)="rejectBug()" class="button-64">
+            REJECT
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16" class="ms-2">
+              <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+              <path d="M4.646 4.646a.5.5 0 0 1 .708 0L8 7.293l2.646-2.647a.5.5 0 0 1 .708.708L8.707 8l2.647 2.646a.5.5 0 0 1-.708.708L8 8.707l-2.646 2.647a.5.5 0 0 1-.708-.708L7.293 8 4.646 5.354a.5.5 0 0 1 0-.708z"/>
+            </svg>
+          </button>
+          <!-- </a> -->
+        </div>
+      </div>
+    </div>
+  </nav>
+<div class="container">
+    <h2>GitHub Repository URL</h2>
+
+    <div class="input-group">
+        <input type="text" [(ngModel)]="repoUrl" class="form-control" placeholder="https://github.com/user/repo"/>
+        <!-- <button class="btn btn-primary" (click)="fetchBranches()" [disabled]="!repoUrl.trim()">Fetch Branches</button> -->
+    </div>
+
+    <div *ngIf="branches.length > 0" class="mt-4">
+        <h3>Developer's Branch</h3>
+        <div class="input-group">
+            <select [(ngModel)]="selectedBranch" class="form-select">
+                <option value="" disabled>Select a branch</option>
+                <option *ngFor="let branch of branches" [value]="branch.name">{{ branch.name }}</option>
+            </select>
+            <button class="btn" (click)="compareBranches()" [disabled]="!selectedBranch">
+                Compare
+            </button>
+        </div>
+    </div>
+
+    <div *ngIf="fileDiffs.length > 0" class="mt-4">
+        <h3>Monaco Diff Editor - All Changed Files</h3>
+
+        <div *ngFor="let fileDiff of fileDiffs" class="mb-5">
+
+            <h5>{{ fileDiff.filename }}</h5>
+            <ngx-monaco-diff-editor 
+            [options]="monacoOptions"
+            [originalModel]="fileDiff.originalModel"
+            (onInit)="onInitDiffEditor($event)"
+            [modifiedModel]="fileDiff.modifiedModel">
+        </ngx-monaco-diff-editor>
+        
+            <!-- <h5>{{ fileDiff.filename }}</h5>
+            <h1>{{fileDiff.originalModel.code}}</h1>
+            <h1>{{fileDiff.originalModel.code}}</h1>
+            <h1>{{fileDiff.modifiedModel.code}}</h1> -->
+           
+        </div>
+    </div>
+</div>

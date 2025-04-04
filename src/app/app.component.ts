@@ -8,9 +8,10 @@ import { LoginComponent } from './components/login/login.component';
 import { SignupComponent } from './components/signup/signup.component';
 import { LeaderboardComponent } from './components/leaderboard/leaderboard.component';
 import { ServicesComponent } from './components/services/services.component';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet, HomeComponent, TopBannerComponent, LeaderboardComponent, NavbarComponent, LoginComponent,SignupComponent,ServicesComponent],
+  imports: [RouterOutlet, HomeComponent, TopBannerComponent, LeaderboardComponent, NavbarComponent, LoginComponent,SignupComponent,ServicesComponent,PdfViewerModule],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })

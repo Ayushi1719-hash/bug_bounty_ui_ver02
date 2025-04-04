@@ -1,54 +1,6 @@
-<!--
-<div class="bug-selection-container">
-  <h2>Select a Bug to Work On</h2>
-   
-    <div class="filters">
-  <label for="difficulty">Difficulty:</label>
-  <select id="difficulty" [(ngModel)]="selectedDifficulty" (change)="applyFilters()">
-  <option value="">All</option>
-  <option *ngFor="let level of difficulties" [value]="level">{{ level }}</option>
-  </select>
-   
-      <label for="techStack">Tech Stack:</label>
-  <select id="techStack" [(ngModel)]="selectedTechStack" (change)="applyFilters()">
-  <option value="">All</option>
-  <option *ngFor="let stack of techStacks" [value]="stack">{{ stack }}</option>
-  </select>
-   
- 
-      <button (click)="applyFilters()">Search</button>
-  </div>
-   
-    <div class="bug-list">
-  <div *ngFor="let bug of filteredBugs" class="bug-card">
-  <div class="bug-header">
-  <h3>{{ bug.title }}</h3>
-  </div>
-  <p>{{ bug.description }}</p>
-   
-  <div class="bug-details">
-  <span class="difficulty">{{ bug.difficulty }}</span>
-  <span class="tech">{{ bug.techStack }}</span>
-  </div>
-   
-      
-  <div class="bug-icons">
-  <a href=''><span><img src="https://cdn-icons-png.flaticon.com/512/482/482138.png" alt="views"></span></a>
-  <a href=''><span><img src="https://cdn-icons-png.flaticon.com/512/847/847969.png" alt="people"></span></a>
-  </div>
-   
-        <a href="/bug-details"><button class="see-details">See details</button></a>
-  </div>
-  </div>
-   
-  <div *ngIf="noBugsFound && (selectedDifficulty || selectedTechStack)" class="no-bugs">
-</div>
-
-  </div>
--->
-
-    <div class="container">
-      <div class="filter-container">
+<app-navbar-dev (solvedBugsClicked)="showSolvedBugs()" (acceptedBugsClicked)="showAcceptedBugs()" (rejectedBugsClicked)="showRejectedBugs()" ></app-navbar-dev>
+<div class="container" >
+      <div class="filter-container" *ngIf="showFilters">
           <div class="filter-group">
               <label for="difficulty">Difficulty</label>
               <select 
@@ -84,38 +36,39 @@
                   </option>
               </select>
           </div>
-          
-          <div class="filter-group">
-              <button class="search-button" (click)="applyFilters()">Search</button>
-          </div>
     
       </div>
 
-          <div class="bug-list">
-            <div *ngFor="let bug of filteredBugs" class="bug-card">
-            <div class="bug-header">
+
+ <div class="bug-list">
+    <div *ngFor="let bug of filteredBugs" class="bug-card">
+        <div class="bug-header">
             <h3>{{ bug.title }}</h3>
-            </div>
-            <p>{{ bug.description }}</p>
-             
-            <div class="bug-details">
+            <!-- <span class="favorite">★</span> -->
+        </div>
+        
+        <p class="bug-description">{{ bug.description.length > 130 ? (bug.description | slice:0:130) + '...' : bug.description }}</p>
+        
+        <div class="bug-details">
             <span class="difficulty">{{ bug.difficulty }}</span>
             <span class="tech">{{ bug.techStack }}</span>
-            </div>
-             
-                
-            <div class="bug-icons">
-            <a href=''><span><img src="https://images.icon-icons.com/909/PNG/512/pdf_icon-icons.com_70898.png" alt="views"></span></a>
-            <a href=''><span><img src="https://cdn0.iconfinder.com/data/icons/file-format-24/32/3_file_format_compressed_zip-512.png" alt="people"></span></a>
-            <!-- </div>
-             
-                  <a href="/bug-details"><button class="see-details">See details</button></a>
-            </div> -->
-            </div>
-             
-            <div *ngIf="noBugsFound && (selectedDifficulty || selectedTechStack)" class="no-bugs">
-          </div>
-          
-            </div>
-    
+        </div>
+        
+        <div class="bug-icons">
+            <span>
+                <img src="https://www.svgrepo.com/show/376243/status-success.svg" alt="Claim" class="img1">
+                <span class="status">{{ bug.status }}</span>
+            </span>
+            <span>
+                <img src="https://www.svgrepo.com/show/376246/status-warning.svg" alt="Reward" class="img2">
+                <span class="reward">{{ bug.reward }}</span>
+            </span>
+        </div>
+        
+        <button [routerLink]="'/bug/' + bug.id" class="see-details">See Details</button>
+    </div>
+</div>
+</div>
+
+  
   

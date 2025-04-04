@@ -1,115 +1,272 @@
 import { Component, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { BugService } from '../../app/bug.service';
-import { Bug } from './bug.model';
- 
+import { CommonModule } from '@angular/common';
+import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { BugEntry } from './bug-entry.model';
+import { Router, RouterModule } from '@angular/router';
+import { NavbarDevComponent } from "../navbar-dev/navbar-dev.component";
+
+interface Bug {
+  id: number;
+  bugId: number;
+  title: string;
+  description: string;
+  difficulty: string;
+  techStack: string;
+  reward: number;
+  status: string;
+  gitRepoSubmitted: string;
+  pdfFilePath?: string;
+  zipFilePath?: string;
+}
+
 @Component({
   selector: 'app-developer-bug-selection',
-  standalone: true,
-  imports: [CommonModule, FormsModule],
   templateUrl: 'developer-bug-selection.component.html',
-  styleUrls: ['developer-bug-selection.component.scss']
+  styleUrls: ['developer-bug-selection.component.scss'],
+  imports: [CommonModule, FormsModule, RouterModule, NavbarDevComponent]
 })
 export class DeveloperBugSelectionComponent implements OnInit {
-  difficulties = ['Easy', 'Medium', 'Hard'];
-  techStacks = ['Java', 'Python', 'C++'];
- 
+  showFilters: boolean = true; // Default: show filters
+  difficulties = ['easy', 'medium', 'hard'];
+  techStacks = ['java', 'python', 'c++'];
+
   selectedDifficulty = '';
   selectedTechStack = '';
- 
   bugs: Bug[] = [];
   filteredBugs: Bug[] = [];
   noBugsFound = false;
- 
-  constructor(private bugService: BugService, private http: HttpClient) {}
- 
+  userId: number = localStorage.getItem('userId') as unknown as number;
+  
+
+  private apiUrl = 'http://localhost:8081/api/bugsEntry';
+
+  constructor(private http: HttpClient,private router: Router) {
+    console.log("Current User",this.userId);
+  }
+
+  viewBugDetails(bugId: number) {
+    this.router.navigate(['/bug-details', bugId]);
+    console.log("BugId",bugId);
+  }
+
   ngOnInit() {
     this.fetchBugs();
   }
- 
+
+  getBugs(difficulty: string | null, techStack: string | null) {
+    const params: any = {};
+    if (difficulty) params['difficulty'] = difficulty;
+    if (techStack) params['techStack'] = techStack;
+  
+    return this.http.get<BugEntry[]>(this.apiUrl, { params });
+  }
+  
+
   fetchBugs() {
-    this.bugService.getBugs().subscribe({
-      next: (data: Bug[]) => {
-        console.log('Fetched bugs:', data);
+    this.http.get<Bug[]>('http://localhost:8081/api/bugsEntry/all').subscribe({
+      next: (data) => {
+        console.log(data);
         this.bugs = data;
-        this.filteredBugs = [...this.bugs]; // Ensure all bugs are displayed initially
-        this.noBugsFound = this.bugs.length === 0;
+        this.filteredBugs = [...this.bugs];
+        this.noBugsFound = this.filteredBugs.length === 0;
+        this.showFilters = true;
       },
-      error: (err: any) => {
+      error: (err) => {
         console.error('Error fetching bugs:', err);
         this.filteredBugs = [];
         this.noBugsFound = true;
       }
     });
   }
- 
+
   applyFilters() {
-    if (!this.selectedDifficulty && !this.selectedTechStack) {
-      console.log("No filters applied, showing all bugs");
-      this.filteredBugs = [...this.bugs];
-      this.noBugsFound = this.filteredBugs.length === 0;
+    let params = new HttpParams();
+    
+    if (this.selectedDifficulty && this.selectedDifficulty !== '') {
+      params = params.set('difficulty', this.selectedDifficulty);
+    }
+    if (this.selectedTechStack && this.selectedTechStack !== '') {
+      params = params.set('techStack', this.selectedTechStack);
+    }
+  
+    this.http.get<Bug[]>('http://localhost:8081/api/bugsEntry/filter', { params }).subscribe({
+      next: (data) => {
+        console.log(params);
+        console.log("Filtered bugs:", data);
+        this.filteredBugs = data;
+
+        this.noBugsFound = this.filteredBugs.length === 0;
+      },
+      error: (err) => {
+        console.error("Error fetching filtered bugs:", err);
+        this.filteredBugs = [];
+        this.noBugsFound = true;
+      }
+    });
+  }
+
+  
+
+  showSolvedBugs() {
+    if (!this.userId) {
+      console.error("User ID not found in localStorage");
       return;
     }
- 
-    const apiUrl = 'http://localhost:8081/api/bugs/filter';
-    let params = new HttpParams();
- 
-    if (this.selectedDifficulty) {
-      params = params.set('difficulty', this.selectedDifficulty);
-    }
-    if (this.selectedTechStack) {
-      params = params.set('techStack', this.selectedTechStack);
-    }
- 
-    this.http.get<Bug[]>(apiUrl, { params }).subscribe({
-      next: (data: Bug[]) => {
-        console.log('Filtered bugs:', data);
-        if (data.length === 0) {
-          this.fetchRelatedBugs();
-        } else {
-          this.filteredBugs = data;
-          this.noBugsFound = false;
-        }
+  
+    const url = `http://localhost:8081/api/submitted-bugs/submitted/details/${this.userId}`;
+  
+    this.http.get<any[]>(url).subscribe({
+      next: (submittedBugs) => {
+        console.log("Submitted bugs:", submittedBugs);
+  
+        // Fetch bug titles for each bugId
+        const bugDetailsRequests = submittedBugs.map(bug =>
+          this.http.get<any>(`http://localhost:8081/api/bugsEntry/${bug.bugId}`)
+        );
+  
+        Promise.all(bugDetailsRequests.map(req => req.toPromise()))
+          .then(bugDetails => {
+            this.filteredBugs = submittedBugs.map((bug, index) => ({
+              id: bug.id,
+              bugId: bug.bugId,
+              title: bugDetails[index]?.title || `Bug #${bug.bugId}`, // Fetch title
+              description: bug.description,
+              difficulty: bug.difficulty,
+              techStack: bug.techStack,
+              reward: bug.reward,
+              status: "Solved",
+              gitRepoSubmitted: bug.gitRepoSubmitted
+            }));
+  
+            this.noBugsFound = this.filteredBugs.length === 0;
+            this.showFilters = false;
+          })
+          .catch(error => {
+            console.error("Error fetching bug details:", error);
+            this.noBugsFound = true;
+            
+          });
       },
-      error: (err: any) => {
-        console.error('Error fetching filtered bugs:', err);
+      error: (err) => {
+        console.error("Error fetching solved bugs:", err);
         this.filteredBugs = [];
         this.noBugsFound = true;
+        this.showFilters = true;
       }
     });
   }
- 
-  fetchRelatedBugs() {
-    let params = new HttpParams();
-    if (this.selectedDifficulty) {
-      params = params.set('difficulty', this.selectedDifficulty);
+
+
+  showAcceptedBugs() {
+    const userId = localStorage.getItem('userId');
+  
+    if (!userId) {
+      console.error("User ID not found in localStorage");
+      return;
     }
-    if (this.selectedTechStack) {
-      params = params.set('techStack', this.selectedTechStack);
-    }
- 
-    const apiUrl = 'http://localhost:8081/api/bugs/related';
- 
-    this.http.get<Bug[]>(apiUrl, { params }).subscribe({
-      next: (relatedBugs: Bug[]) => {
-        if (relatedBugs.length > 0) {
-          this.filteredBugs = relatedBugs;
-          alert('No exact match found, but here are some related bugs.');
-        } else {
-          this.filteredBugs = [];
-          this.noBugsFound = true;
-          alert('No bugs found. Try different filters or check back later.');
-        }
+  
+    const url = `http://localhost:8081/api/leaderboard/accepted/${userId}`;
+  
+    this.http.get<any[]>(url).subscribe({
+      next: (acceptedBugs) => {
+        console.log("Accepted bugs:", acceptedBugs);
+  
+        // Fetch bug details for each accepted bug
+        const bugDetailsRequests = acceptedBugs.map(bug =>
+          this.http.get<any>(`http://localhost:8081/api/bugsEntry/${bug.bugId}`)
+        );
+  
+        // Fetch all details and map them to our bug list
+        Promise.all(bugDetailsRequests.map(req => req.toPromise()))
+          .then(bugDetails => {
+            this.filteredBugs = acceptedBugs.map((bug, index) => ({
+              id: bug.bugId,
+              bugId: bug.bugId,
+              title: bugDetails[index]?.title || `Bug #${bug.bugId}`,
+              description: bugDetails[index]?.description || "No description available",
+              difficulty: bugDetails[index]?.difficulty || "N/A",
+              techStack: bugDetails[index]?.techStack || "N/A",
+              reward: bug.reward,
+              status: "Accepted",
+              gitRepoSubmitted: bug.gitRepoSubmitted || ""
+            }));
+  
+            this.noBugsFound = this.filteredBugs.length === 0;
+            this.showFilters = false;
+          })
+          .catch(error => {
+            console.error("Error fetching bug details:", error);
+            this.noBugsFound = true;
+          });
       },
-      error: (err: any) => {
-        console.error('Error fetching related bugs:', err);
+      error: (err) => {
+        console.error("Error fetching accepted bugs:", err);
         this.filteredBugs = [];
         this.noBugsFound = true;
+        this.showFilters = true;
       }
     });
   }
+
+  showRejectedBugs() {
+    const userId = localStorage.getItem('userId');
+  
+    if (!userId) {
+      console.error("User ID not found in localStorage");
+      return;
+    }
+  
+    const url = `http://localhost:8081/api/rejected/developer/${userId}`;
+  
+    this.http.get<any[]>(url).subscribe({
+      next: (rejectedBugs) => {
+        console.log("Rejected bugs:", rejectedBugs);
+  
+        // Fetch bug details for each rejected bug
+        const bugDetailsRequests = rejectedBugs.map(bug =>
+          this.http.get<any>(`http://localhost:8081/api/bugsEntry/${bug.bugId}`)
+        );
+  
+        // Fetch all details and map them to our bug list
+        Promise.all(bugDetailsRequests.map(req => req.toPromise()))
+          .then(bugDetails => {
+            this.filteredBugs = rejectedBugs.map((bug, index) => ({
+              id: bug.bugId,
+              bugId: bug.bugId,
+              title: bugDetails[index]?.title || `Bug #${bug.bugId}`,
+              description: bugDetails[index]?.description || "No description available",
+              difficulty: bugDetails[index]?.difficulty || "N/A",
+              techStack: bugDetails[index]?.techStack || "N/A",
+              reward: bug.reward,
+              status: "Rejected",
+              gitRepoSubmitted: bug.gitRepoSubmitted || ""
+            }));
+  
+            this.noBugsFound = this.filteredBugs.length === 0;
+            this.showFilters = false;
+          })
+          .catch(error => {
+            console.error("Error fetching bug details:", error);
+            this.noBugsFound = true;
+          });
+      },
+      error: (err) => {
+        console.error("Error fetching rejected bugs:", err);
+        this.filteredBugs = [];
+        this.noBugsFound = true;
+        this.showFilters = true;
+      }
+    });
+  }
+  
+  
+  
+  
+  
+  
 }
+
  
  
