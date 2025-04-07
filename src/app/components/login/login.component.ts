@@ -52,8 +52,9 @@ export class LoginComponent {
             // Store token & role in localStorage or a service
             console.log(response);
             localStorage.setItem('token', response.token);
-            localStorage.setItem('userRole', response.role);
+            localStorage.setItem('userRole', response.roles[0]);
             localStorage.setItem('userId',response.id);
+            
   
             // Redirect based on 
             if(response.id==12){

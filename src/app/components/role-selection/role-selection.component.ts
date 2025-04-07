@@ -11,9 +11,9 @@ export class RoleSelectionComponent {
  
   selectRole(role: string) {
     if (role === 'developer') {
-      this.router.navigate(['/developer-bugs']);
+      this.router.navigate(['/developer']);
     } else {
-      this.router.navigate(['/company-dashboard']);
+      this.router.navigate(['/company']);
     }
   }
 }

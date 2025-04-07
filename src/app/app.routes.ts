@@ -19,6 +19,8 @@ import { ForgotPasswordComponent } from './components/forgot-password/forgot-pas
 import { VerifyForgotPasswordOtpComponent } from './components/verify-forgot-password-otp/verify-forgot-password-otp.component';
 import { ResetPasswordComponent } from './components/reset-password/reset-password.component';
 import { GithubComponent } from './components/github/github.component';
+import { AuthGuard } from './auth.guard';
+import { RoleGuard } from './role.guard';
 
 export const routes: Routes = [
     {
@@ -41,12 +43,30 @@ export const routes: Routes = [
     {
          path: 'select-role', component: RoleSelectionComponent, pathMatch: 'full'
     },
-    {
-        path: 'company', component: CompanyComponent, pathMatch: 'full'
-   },
-   {
-    path: 'developer', component:DeveloperBugSelectionComponent, pathMatch: 'full'
-    },
+//     {
+//         path: 'company', component: CompanyComponent, pathMatch: 'full'
+//    },
+//    {
+//     path: 'developer', component:DeveloperBugSelectionComponent, pathMatch: 'full'
+//     },
+{
+    path: 'developer',
+    component: DeveloperBugSelectionComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRole: 'developer' }
+  },
+  {
+    path: 'company',
+    component: CompanyComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRole: 'company' }
+  },
+  {
+    path: 'admin',
+    component: AdminDashboardComponent,
+    canActivate: [AuthGuard, RoleGuard],
+    data: { expectedRole: 'Admin' }
+  },
     { path: 'bug/:id', component: BugDetailsComponent },
     { path: 'bugCompany/:id', component: BugDetailsCompanyComponent },
    {
@@ -61,9 +81,9 @@ export const routes: Routes = [
     {
     path:'company-edit-bug/:id',component:CompanyEditBugComponent,pathMatch:'full'
     },
-    {
-    path:'admin',component:AdminDashboardComponent,pathMatch:'full'
-    },
+    // {
+    // path:'admin',component:AdminDashboardComponent,pathMatch:'full'
+    // },
 { path: 'forgot-password', component: ForgotPasswordComponent },
   { path: 'verify-forgot-password-otp', component: VerifyForgotPasswordOtpComponent },
   { path: 'github/:bugId/:gitRepoSubmitted/:id', component: GithubComponent },
